@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="8c49ae2877974d16b052e9f2c8f57e8c" Name="Diagram1">
+        <EntityTypeShape EntityType="TMSModel.RegressFileTest" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TMSModel.TestCase" Width="2" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TMSModel.TestCaseAssigned" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TMSModel.TestCycle" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TMSModel.TestDataModelFunction" Width="2.625" PointX="5" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TMSModel.TestDataNodeAnaylysi" Width="2.375" PointX="4.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TMSModel.TestDataNodeTriggeredEvent" Width="3.125" PointX="8" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TMSModel.TestEnvironment" Width="2.125" PointX="8.5" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TMSModel.TestExpressionInjection" Width="4.625" PointX="6.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TMSModel.TestNode" Width="1.5" PointX="0.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TMSModel.TestNodeDetail" Width="1.5" PointX="2.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TMSModel.TestResultTemplate" Width="3.5" PointX="11.625" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TMSModel.TestScenario" Width="1.5" PointX="11.125" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="TMSModel.TestScript" Width="1.5" PointX="12.375" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="TMSModel.TestScriptParameter" Width="1.5" PointX="4.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TMSModel.TestScriptParameterType" Width="1.5" PointX="6.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TMSModel.TestType" Width="1.5" PointX="8.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TMSModel.User" Width="2.625" PointX="0.75" PointY="10.75" />
+        <EntityTypeShape EntityType="TMSModel.TestConnectionType" Width="3.75" PointX="7.375" PointY="12.75" />
+        <EntityTypeShape EntityType="TMSModel.TestAssembly" Width="1.5" PointX="12.375" PointY="12.75" />
+        <EntityTypeShape EntityType="TMSModel.TestClass" Width="1.5" PointX="13.375" PointY="3.75" />
+        <EntityTypeShape EntityType="TMSModel.TargetFramework" Width="1.5" PointX="4.75" PointY="13.75" />
+        <EntityTypeShape EntityType="TMSModel.TestTargetFrameworkVersion" Width="1.5" PointX="0.75" PointY="14.75" />
+        <EntityTypeShape EntityType="TMSModel.TestConnection" Width="1.5" PointX="11.375" PointY="9.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
