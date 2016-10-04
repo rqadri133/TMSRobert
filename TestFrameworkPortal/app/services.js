@@ -18,6 +18,18 @@ app.service("TestFramworkService", function ($http ,$rootScope)
 
     };
 
+
+    this.loadAllConnections = function (tokenObj) {
+        return $http(
+          {
+              method: 'post',
+              data: tokenObj,
+              url: 'testconnections/LoadAll'
+
+          });
+    };
+
+
         
  this.saveTestCaseInfo = function (testCycleInfo) {
                     return $http(

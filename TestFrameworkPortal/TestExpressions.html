@@ -1,1 +1,107 @@
-﻿
+﻿<!---Infosys innovation Team-->
+<div ng-controller="TestExpressionController as testEctrl" class="row">
+    <form id="frmTestExpression" ng-model="expressionObj" ng-submit="addTestExpression(testConnectionObj)">
+        <div ng-show="showExpressionList" class="col col-md-offset-1">
+            <div class="widget widget-content">
+                <label class="label label-success"> Expressions </label>
+                <table class="table table-bordered table-condensed table-striped">
+                    <thead>
+                        <tr>
+                            <th>Select Expression</th>
+                            <th>Generated Expression</th>
+                            <th>Created By</th>
+                            <th>Created Date</th>
+                            <th>Purpose</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        <tr ng-repeat="exp in allExpressions">
+
+                            <td class="btn btn-primary"> 
+                                <input  type="checkbox" ng-model="exp.selExpression">    
+                            </td>
+                            <td>{{exp.GeneratedExpression}}</td>
+
+                            <td>{{user.PhoneNumber}}</td>
+                        
+                        </tr>
+
+                        <tr>
+                            <td align="right" class="col col-md-offset-2">
+                                <button ng-show="showAddButton" id="btnAddExpression" class="btn btn-danger"> {{testExpressionMessage}}  </button>
+                                <button ng-show="showRemoveButton" id="btnRemoveExpression" class="btn btn-success"> {{testExpressionMessage}}  </button>
+                            </td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+            <div ng-show="showExpressionForm" class="widget widget-content">
+                <table class="table">
+                    <tr>
+                        <td class="col col-md-offset-1">
+                            <b>Select Connection Source</b> <br />
+                            <select ng-model="expressionObj.TestConnectionID" ng-options="testExp.TestConnectionID as testExp.TestConnctionName for testCon in testConnectionsDefined"></select>
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td class="col col-md-offset-1">
+                            <b>Select Source Table</b> <br />
+                            <select ng-model="expressionObj.TestTableID" ng-options="testExp.TestTableID as testExp.TestTableName for testExp in testTableSource"></select>
+
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col col-md-offset-1">
+                            <b>Select Test Column Source</b> <br />
+                             <select ng-model="expressionObj.SourceColumnID" ng-options="exprCol.TestColumnID as exprCol.TestColumnName for  in testConnectionsDefined"></select>
+                        </td>
+
+                    </tr>
+
+                    <tr>
+                        <td class="col col-md-offset-1">
+                            <b>Select Test Operation To Perform Between Source And Target Columns</b> <br />
+                            <select ng-model="expressionObj.SourceColumnID" ng-options="exprCol.TestColumnID as exprCol.TestColumnName for  in testConnectionsDefined"></select>
+                        </td>
+
+                    </tr>
+
+                    <tr>
+                        <td class="col col-md-offset-1">
+                            <b>Reason</b> <br />
+                        </td>
+
+                    </tr>
+
+
+
+                    <tr>
+                        <td class="col col-md-offset-">
+                            <button id="btnCaseSaveCon" class="btn btn-primary"> Save  </button>
+                            <button id="btnCancel" class="btn btn-danger"> Cancel </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="right" class="col col-md-offset-2">
+                            <label ng-show="showSuccessCon" id="btnCaseSave" class="label label-success"> {{testExpressionMessage}}  </label>
+                            <label ng-show="showFailedCon" id="btnCaseSave" class="label label-danger"> {{testExpressionMessage}}  </label>
+                        </td>
+                    </tr>
+                </table>
+
+            </div>
+
+        </div>
+
+    </form>
+
+
+</div>

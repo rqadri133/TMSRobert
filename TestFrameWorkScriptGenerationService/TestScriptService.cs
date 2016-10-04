@@ -190,6 +190,24 @@ namespace TestFrameWorkScriptGenerationService
 
 
 
+        public TestExpression GenerateRegexExpression(TestExpression ruleExpression)
+        {
+
+            /* 
+             * implementaion required with case Factory Type 
+             * 
+             * 
+             */
+
+
+            return new TestExpression();
+
+
+        }
+
+
+
+
 
 
 

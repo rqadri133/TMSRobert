@@ -68,6 +68,11 @@ namespace TestFrameWorkScriptGenerationService
          TestReport ScriptReport<T>(TestScript script, CodeGenerationInstruction codeInstructions);
 
 
+        [OperationContract]
+        TestExpression GenerateRegexExpression(TestExpression ruleExpression);
+
+
+
     }
 
     // Use a data contract as illustrated in the sample below to add composite types to service operations.
@@ -187,8 +192,145 @@ namespace TestFrameWorkScriptGenerationService
 
         }
 
+        [DataMember]
+        public Guid SourceTableID
+        {
 
-        
+            get;
+            set;
+
+        }
+
+        [DataMember]
+        public Guid DestTableID
+        {
+
+            get;
+            set;
+
+        }
+
+
+
+        [DataMember]
+        public Guid SourceSchemaDefined
+        {
+
+            get;
+            set;
+
+        }
+
+
+
+
+        [DataMember]
+        public Guid DestSchemaDefined
+        {
+
+            get;
+            set;
+
+        }
+
+
+
+        [DataMember]
+        public Guid SourceColumnID
+        {
+
+            get;
+            set;
+
+        }
+
+
+        [DataMember]
+        public string SourceValueToCheck
+        {
+
+            get;
+            set;
+
+        }
+
+
+
+
+        [DataMember]
+        public string DestinationValueToCheck
+        {
+
+            get;
+            set;
+
+        }
+
+
+
+
+        [DataMember]
+        public string OpertorAppliedInBetweenColumns
+        {
+
+            get;
+            set;
+
+        }
+
+
+        [DataMember]
+        public Guid MatchToColumnID
+        {
+
+            get;
+            set;
+
+        }
+
+
+
+        [DataMember]
+        public bool IsMatchFound
+        {
+
+            get;
+            set;
+
+        }
+
+
+        public int ExpressionIndexToken
+        {
+            get;
+            set;
+
+        }
+
+
+        public string  GeneratedExpressionByService 
+        {
+            get;
+            set;
+
+        }
+
+        // A URL TO PICK VALUE FROM with non sql services or just cloud services
+        public string ExpressionServiceURLSource_NONSQL
+        {
+            get;
+            set;
+
+        }
+
+        // A URL TO CHECK VALUE TO 
+        public string ExpressionServiceURLTARGET_NONSQL
+        {
+            get;
+            set;
+
+        }
+
 
 
 
