@@ -193,6 +193,16 @@ warning 6002: The table/view 'TestCaseManagementSystem.dbo.TestConnectionType' d
           <Property Name="CreatedDate" Type="datetime" Nullable="false" />
           <Property Name="CreatedBy" Type="uniqueidentifier" Nullable="false" />
         </EntityType>
+        <EntityType Name="TestOperand">
+          <Key>
+            <PropertyRef Name="TestOperandID" />
+          </Key>
+          <Property Name="TestOperandID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="TestOperandToken" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="TestOperandDEsc" Type="nvarchar" MaxLength="4000" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
         <EntityType Name="TestResultTemplates">
           <Key>
             <PropertyRef Name="TestResultTemplateID" />
@@ -292,6 +302,7 @@ warning 6002: The table/view 'TestCaseManagementSystem.dbo.TestConnectionType' d
           <EntitySet Name="TestExpressionInjections" EntityType="Self.TestExpressionInjections" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TestNodeDetails" EntityType="Self.TestNodeDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TestNodes" EntityType="Self.TestNodes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TestOperand" EntityType="Self.TestOperand" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TestResultTemplates" EntityType="Self.TestResultTemplates" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TestScenarios" EntityType="Self.TestScenarios" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TestScriptParameters" EntityType="Self.TestScriptParameters" Schema="dbo" store:Type="Tables" />
@@ -535,6 +546,7 @@ warning 6002: The table/view 'TestCaseManagementSystem.dbo.TestConnectionType' d
           <EntitySet Name="TestAssemblies" EntityType="TMSModel.TestAssembly" />
           <EntitySet Name="TestClasses" EntityType="TMSModel.TestClass" />
           <EntitySet Name="TestConnections" EntityType="TMSModel.TestConnection" />
+          <EntitySet Name="TestOperands" EntityType="TMSModel.TestOperand" />
         </EntityContainer>
         <EntityType Name="User">
           <Key>
@@ -625,6 +637,16 @@ warning 6002: The table/view 'TestCaseManagementSystem.dbo.TestConnectionType' d
           <Property Name="TestConnectionName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="TestConnectionString" Type="String" MaxLength="3000" FixedLength="false" Unicode="true" />
           <Property Name="TestConnectionTypeID" Type="Guid" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Guid" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TestOperand">
+          <Key>
+            <PropertyRef Name="TestOperandID" />
+          </Key>
+          <Property Name="TestOperandID" Type="Guid" Nullable="false" />
+          <Property Name="TestOperandToken" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="TestOperandDEsc" Type="String" Nullable="false" MaxLength="4000" FixedLength="false" Unicode="true" />
           <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="CreatedBy" Type="Guid" Nullable="false" />
         </EntityType>
@@ -907,6 +929,17 @@ warning 6002: The table/view 'TestCaseManagementSystem.dbo.TestConnectionType' d
                 <ScalarProperty Name="TestConnectionString" ColumnName="TestConnectionString" />
                 <ScalarProperty Name="TestConnectionName" ColumnName="TestConnectionName" />
                 <ScalarProperty Name="TestConnectionID" ColumnName="TestConnectionID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TestOperands">
+            <EntityTypeMapping TypeName="TMSModel.TestOperand">
+              <MappingFragment StoreEntitySet="TestOperand">
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="TestOperandDEsc" ColumnName="TestOperandDEsc" />
+                <ScalarProperty Name="TestOperandToken" ColumnName="TestOperandToken" />
+                <ScalarProperty Name="TestOperandID" ColumnName="TestOperandID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

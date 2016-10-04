@@ -29,6 +29,7 @@
         <EntityTypeShape EntityType="TMSModel.TargetFramework" Width="1.5" PointX="4.75" PointY="13.75" />
         <EntityTypeShape EntityType="TMSModel.TestTargetFrameworkVersion" Width="1.5" PointX="0.75" PointY="14.75" />
         <EntityTypeShape EntityType="TMSModel.TestConnection" Width="1.5" PointX="11.375" PointY="9.75" />
+        <EntityTypeShape EntityType="TMSModel.TestOperand" Width="1.5" PointX="13.375" PointY="9.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -13,6 +13,10 @@ app.service("TestFramworkService", function ($http ,$rootScope)
 
     };
 
+    this.getTestOperands = function () {
+        return $http.get("api/TestOperands")
+
+    };
 
         
  this.saveTestCaseInfo = function (testCycleInfo) {

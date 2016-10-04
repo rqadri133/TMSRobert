@@ -241,6 +241,7 @@
     <Compile Include="Controllers\TestCasesController.cs" />
     <Compile Include="Controllers\TestConnectionsController.cs" />
     <Compile Include="Controllers\TestConnectionTypesController.cs" />
+    <Compile Include="Controllers\TestOperandsController.cs" />
     <Compile Include="Controllers\TestTypesController.cs" />
     <Compile Include="Controllers\TokenSystemController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
@@ -300,6 +301,9 @@
       <DependentUpon>TMS.tt</DependentUpon>
     </Compile>
     <Compile Include="TestNodeDetail.cs">
+      <DependentUpon>TMS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TestOperand.cs">
       <DependentUpon>TMS.tt</DependentUpon>
     </Compile>
     <Compile Include="TestResultTemplate.cs">
@@ -373,9 +377,6 @@
     <Content Include="images\dragon-fruit-nutrition-factsNN.jpg" />
     <Content Include="Scripts\ai.0.15.0-build58334.js" />
     <Content Include="Scripts\ai.0.15.0-build58334.min.js" />
-    <Content Include="ApplicationInsights.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
@@ -1208,6 +1209,7 @@
     <Content Include="Scripts\_references.js" />
     <Content Include="TestConnections.html" />
     <Content Include="TestCase.html" />
+    <Content Include="TestExpressions.html" />
     <Content Include="TMS.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>TMS.edmx</DependentUpon>

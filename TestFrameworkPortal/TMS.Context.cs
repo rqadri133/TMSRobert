@@ -49,5 +49,6 @@ namespace TestFrameworkPortal
         public virtual DbSet<TestAssembly> TestAssemblies { get; set; }
         public virtual DbSet<TestClass> TestClasses { get; set; }
         public virtual DbSet<TestConnection> TestConnections { get; set; }
+        public virtual DbSet<TestOperand> TestOperands { get; set; }
     }
 }
