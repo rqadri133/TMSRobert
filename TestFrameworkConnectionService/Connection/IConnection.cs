@@ -15,31 +15,7 @@ namespace TestFrameworkConnectionService.Connection
 
 
 
-    public class AzureCloudConnection : IConnection
-    {
-        public Connector Connect(Connector connection)
-        {
-
-            // Add Azzure Nuget Cloud services
-
-            try
-            {
-
-
-            }
-
-            catch (Exception excp)
-            {
-
-
-            }
-
-            return new Connector();
-
-        }
-
-
-}
+   
 
 
 
@@ -150,7 +126,31 @@ namespace TestFrameworkConnectionService.Connection
 
 
     }
+    public class BigQueryEngineConnection : IConnection
+    {
+        public Connector Connect(Connector connection)
+        {
 
+            // Add Azzure Nuget Cloud services
+
+            try
+            {
+
+
+            }
+
+            catch (Exception excp)
+            {
+
+
+            }
+
+            return new Connector();
+
+        }
+
+
+    }
 
 
     public class SASFinanceConnection : IConnection

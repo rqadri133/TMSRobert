@@ -96,7 +96,7 @@ namespace TestFrameworkConnectionService
         #endregion
 
 
-        public IConnection ConnectDirect<T>(T node , Guid TokenId)
+        public IConnection ConnectDirect<T>(T node , Guid TokenId)  
         {
             IConnection connect = null;
             Connector connector = new Connector();
@@ -104,8 +104,8 @@ namespace TestFrameworkConnectionService
 
             switch(node.GetType().Name)
             {
-                case "AzureCloudConnection":
-                    connect = new AzureCloudConnection();
+                case "CloudConnection":
+                    connect = new BigQueryEngineConnection();
                     connect.Connect(connector);
                     break;
                 case "SQLServerConnection":
