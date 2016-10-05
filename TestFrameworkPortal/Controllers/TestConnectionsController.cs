@@ -36,6 +36,33 @@ namespace TestFrameworkPortal.Controllers
             return Ok(testConnection);
         }
 
+        
+
+        [Route("'testconnections/LoadAll")]
+        [HttpPost]
+        public List<TestConnection> GetTestConnection(proxyClasses.Token token)
+        {
+            Guid _authenticationToken;
+            User selectedTokenized = null;
+            var _connections = new List<TestConnection>();
+
+            if (!String.IsNullOrEmpty(token.AuthenticationToken))
+            {
+                _authenticationToken = Guid.Parse(token.AuthenticationToken);
+                selectedTokenized = db.Users.ToList().Find(p => p.UserID == _authenticationToken);
+                // User exist in session  
+
+                if (selectedTokenized != null)
+                {
+                    _connections = db.TestConnections.ToList<TestConnection>();
+                }
+
+            }
+            return _connections;
+
+        }
+
+
         // PUT: api/TestConnections/5
         [ResponseType(typeof(void))]
         public IHttpActionResult PutTestConnection(Guid id, TestConnection testConnection)

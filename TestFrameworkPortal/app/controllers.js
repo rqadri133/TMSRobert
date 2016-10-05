@@ -252,21 +252,37 @@ app.controller('TestExpressionController', function ($scope, $http, $rootScope, 
 
     $scope.showFailedCon = false;
 
+    $scope.expressionObj = {
+        TestTableID: "",
+        TestTableTargetID:  "",
+        TestCodeRuleID: "",
+        SourceColumnID : "" ,
+        OperandIDApplied : "",
+        TargetColumnID: "",
+        TestConnectionSourceID : ""
+    };
+    
+
+
+    var testConnections = TestFramworkService.loadAllConnections(token);
+
+        testConnections.then(function (d) {
+        $scope.testConnectionsDefined = d.data;
+         $scope.expressionObj.TestConnectionSourceID = d.data[0].TestConnectionID;
+
+    }, function (error) {
+        console.log('Oops! Something went wrong while saving the data.');
+    });
+
+    // here i don't need case info 
+
         var token  = 
         {
             TokenID :  $rootScope.UserID
          };
 
 
-       var testConnections = TestFramworkService.loadAllConnections(token);
-
-       testConnections.then(function (d) {
-             $scope.testConnections = d.data;
-             $scope.testExpression.TestConnectionSourceID = d.data[0].TestConnectionID;
-
-    }, function (error) {
-        console.log('Oops! Something went wrong while saving the data.');
-    });
+     
 
 
 
