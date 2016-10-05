@@ -9,6 +9,8 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using TestFrameworkPortal;
+using TestFrameworkPortal.proxyClasses;
+
 
 namespace TestFrameworkPortal.Controllers
 {
@@ -61,6 +63,37 @@ namespace TestFrameworkPortal.Controllers
             return _connections;
 
         }
+
+        [Route("'associated/loadAllTables")]
+        [HttpPost]
+        public List<TestTable> GetAllTables(proxyClasses.Token token)
+        {
+            Guid _authenticationToken;
+            User selectedTokenized = null;
+            var _connections = new List<TestConnection>();
+
+            if (!String.IsNullOrEmpty(token.AuthenticationToken))
+            {
+                _authenticationToken = Guid.Parse(token.AuthenticationToken);
+                selectedTokenized = db.Users.ToList().Find(p => p.UserID == _authenticationToken);
+                // User exist in session  
+
+                if (selectedTokenized != null)
+                {
+                          token.ConnectionStr
+
+                      //                 _connections = db.TestConnections.ToList<TestConnection>();
+
+
+
+                }
+
+            }
+            return _connections;
+
+        }
+
+
 
 
         // PUT: api/TestConnections/5

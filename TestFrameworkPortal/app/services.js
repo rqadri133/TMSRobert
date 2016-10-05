@@ -32,6 +32,20 @@ app.service("TestFramworkService", function ($http ,$rootScope)
     };
 
 
+    this.loadAllAssociatedTables = function (tokenObj) {
+        return $http(
+          {
+              method: 'post',
+              data: tokenObj,
+              url: 'associated/loadAllTables'
+
+          });
+    };
+
+
+
+
+
         
  this.saveTestCaseInfo = function (testCycleInfo) {
                     return $http(

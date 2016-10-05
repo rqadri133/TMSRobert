@@ -51,7 +51,7 @@
                         </td>
                         <td class="col col-md-offset-1">
                             <b>Target Connection </b> <br />
-                            <select ng-model="expressionObj.TestConnectionDestID" ng-options="testExp.TestConnectionID as testExp.TestConnctionName for testCon in testConnectionsDefined"></select>
+                            <select ng-model="expressionObj.TestConnectionDestID"  ng-change="loadAssociatedTables(expressionObj.TestConnectionDestID)"   ng-options="testExp.TestConnectionID as testExp.TestConnctionName for testCon in testConnectionsDefined"></select>
                         </td>
 
                     </tr>

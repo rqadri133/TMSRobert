@@ -241,7 +241,7 @@ app.controller('TestConnectionController', function ($scope, $http, $rootScope, 
 });
 
 
-
+// Fuck China mother fucking chinese and russians long live America 
 
 app.controller('TestExpressionController', function ($scope, $http, $rootScope, TestFramworkService) {
     /* test the screen only */
@@ -261,7 +261,7 @@ app.controller('TestExpressionController', function ($scope, $http, $rootScope, 
         TargetColumnID: "",
         TestConnectionSourceID : ""
     };
-    
+   
 
 
     var testConnections = TestFramworkService.loadAllConnections(token);
@@ -282,7 +282,14 @@ app.controller('TestExpressionController', function ($scope, $http, $rootScope, 
          };
 
 
-     
+
+
+        $scope.loadAssociatedTables = function (testConnectionID) {
+
+
+
+
+        };
 
 
 

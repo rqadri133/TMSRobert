@@ -3,32 +3,28 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Runtime.Serialization;
-
 namespace TestFrameworkPortal.proxyClasses
 {
+
+
     [DataContract]
-    public class Token
+    public class TestTable
     {
         [DataMember]
-        public string AuthenticationToken
+        public string TestTableName
         {
             get;
             set;
 
-
         }
-
 
 
         [DataMember]
-        public string ConnectionStr
+        public Guid TestTableID
         {
             get;
             set;
-        }
-
-
-
+        }  
 
     }
 }

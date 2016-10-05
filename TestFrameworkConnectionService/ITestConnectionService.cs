@@ -15,6 +15,9 @@ namespace TestFrameworkConnectionService
         // Send the required number of connections needed to be connected
         [OperationContract]
          List<Connector>  ConnectService<T>(List<T> node);
+        [OperationContract]
+        List<Connector> ConnectReturnAllTables(string connectionStr , string ConType);
+
         // TODO: Add your service operations here
         [OperationContract]
         List<Assembly> LoadAllAssembliesForTheConnections<T>(List<T> node);
