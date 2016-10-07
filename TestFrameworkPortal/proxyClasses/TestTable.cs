@@ -26,5 +26,55 @@ namespace TestFrameworkPortal.proxyClasses
             set;
         }  
 
+
+        [DataMember]
+        public List<TestColumn> TestColumns
+        {
+            get;
+            set;
+
+        }
+
+
+
+
     }
+
+
+
+
+
+    [DataContract]
+    public class TestColumn
+    {
+        [DataMember]
+        public Guid  TestColumnID
+        {
+            get;
+            set;
+
+        }
+        
+        [DataMember]
+        public string TestColumnName
+        {
+            get;
+            set;
+
+        }
+
+
+        [DataMember]
+        public string TestColumnType
+        {
+            get;
+            set;
+
+        }
+
+
+
+
+    }
+
 }

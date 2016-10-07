@@ -41,6 +41,17 @@ namespace TestFrameworkConnectionService
         }
 
 
+        #region "this will take connection string and return all tables along with Column Names with out data"
+        public TestDataModel ConnectReturnAllTables(string connectionStr, string ConType)
+        {
+            // implmentation required  
+
+            return new TestDataModel();
+        }
+
+
+
+        #endregion
 
 
 

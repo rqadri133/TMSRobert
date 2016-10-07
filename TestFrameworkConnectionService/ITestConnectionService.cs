@@ -16,7 +16,7 @@ namespace TestFrameworkConnectionService
         [OperationContract]
          List<Connector>  ConnectService<T>(List<T> node);
         [OperationContract]
-        List<Connector> ConnectReturnAllTables(string connectionStr , string ConType);
+        TestDataModel ConnectReturnAllTables(string connectionStr , string ConType);
 
         // TODO: Add your service operations here
         [OperationContract]

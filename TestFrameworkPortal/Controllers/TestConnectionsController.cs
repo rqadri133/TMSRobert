@@ -77,19 +77,17 @@ namespace TestFrameworkPortal.Controllers
                 _authenticationToken = Guid.Parse(token.AuthenticationToken);
                 selectedTokenized = db.Users.ToList().Find(p => p.UserID == _authenticationToken);
                 // User exist in session  
-
                 if (selectedTokenized != null)
                 {
-                          token.ConnectionStr
-
-                      //                 _connections = db.TestConnections.ToList<TestConnection>();
-
-
+                         // token.ConnectionStr 
+                      //   _connections = db.TestConnections.ToList<TestConnection>();
+                      // Call connection service to load all tables 
+                      // implementation required 
 
                 }
 
             }
-            return _connections;
+            return  new List<TestTable>();
 
         }
 
