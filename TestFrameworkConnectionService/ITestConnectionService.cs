@@ -79,6 +79,13 @@ namespace TestFrameworkConnectionService
             set;
         }
 
+        [DataMember]
+        public string Schema
+        {
+            get;
+            set;
+
+        }
 
 
     }

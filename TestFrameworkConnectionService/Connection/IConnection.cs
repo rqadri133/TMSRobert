@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Data;
+using System.Data.Sql;
+using System.Data.SqlClient;
 namespace TestFrameworkConnectionService.Connection
 {
     public interface IConnection
@@ -48,14 +50,18 @@ namespace TestFrameworkConnectionService.Connection
 
     public class SQLServerConnection : IConnection
     {
+
+      
         public Connector Connect(Connector connection)
         {
-
             // Add Azzure Nuget Cloud services
+            SqlConnection _sqlConnection = new SqlConnection(connection.ConnectionStringVal);
 
             try
             {
-
+                _sqlConnection.Open();
+            
+                // Load All tables for provided schema and return            
 
             }
 

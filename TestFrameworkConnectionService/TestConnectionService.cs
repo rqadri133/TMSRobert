@@ -42,9 +42,25 @@ namespace TestFrameworkConnectionService
 
 
         #region "this will take connection string and return all tables along with Column Names with out data"
-        public TestDataModel ConnectReturnAllTables(string connectionStr, string ConType)
+        public TestDataModel ConnectReturnAllTables(Connector connector)
         {
             // implmentation required  
+            IConnection connection = null;
+            switch(connector.ConnectionType)
+            {
+                case  "SqlServer" :
+                    connection = new SQLServerConnection();
+                    connector.ConnectionStringVal = connector.ConnectionStringVal;
+                    connector.ConnectionType = connector.ConnectionType;
+                    connection.Connect(connector);
+                    break;
+
+      
+            }
+
+
+
+
 
             return new TestDataModel();
         }
