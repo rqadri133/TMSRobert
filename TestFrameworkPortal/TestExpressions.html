@@ -1,47 +1,7 @@
 ﻿<!---Infosys innovation Team-->
 <div ng-controller="TestExpressionController as testEctrl" class="row">
     <form id="frmTestExpression" ng-model="expressionObj" ng-submit="addTestExpression(expressionObj)">
-        <div ng-show="showExpressionList" class="col col-md-offset-1">
-            <div class="widget widget-content">
-                <label class="label label-success"> Expressions </label>
-                <table class="table table-bordered table-condensed table-striped">
-                    <thead>
-                        <tr>
-                            <th>Select Expression</th>
-                            <th>Generated Expression</th>
-                            <th>Created By</th>
-                            <th>Created Date</th>
-                            <th>Purpose</th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-
-                        <tr ng-repeat="exp in allExpressions">
-
-                            <td class="btn btn-primary"> 
-                                <input  type="checkbox" ng-model="exp.selExpression">    
-                            </td>
-                            <td>{{exp.GeneratedExpression}}</td>
-                            <td>{{exp.CreatedBy}}</td>
-                            <td>{{exp.CreatedDate}}</td>
-                            <th>{{exp.Purpose}}</th>
-                       
-                        </tr>
-
-                        <tr>
-                            <td align="right" class="col col-md-offset-2">
-                                <button ng-show="showAddButton" id="btnAddExpression" class="btn btn-danger"> {{testExpressionMessage}}  </button>
-                                <button ng-show="showRemoveButton" id="btnRemoveExpression" class="btn btn-success"> {{testExpressionMessage}}  </button>
-                            </td>
-                        </tr>
-
-                    </tbody>
-
-                </table>
-
-            </div>
-
+        
             <div ng-show="showExpressionForm" class="widget widget-content">
                 <table class="table">
                     <tr>
@@ -51,7 +11,7 @@
                         </td>
                         <td class="col col-md-offset-1">
                             <b>Target Connection </b> <br />
-                            <select ng-model="expressionObj.TestConnectionDestID"  ng-change="loadAssociatedTables(expressionObj.TestConnectionDestID)"   ng-options="testExp.TestConnectionID as testExp.TestConnctionName for testCon in testConnectionsDefined"></select>
+                            <select ng-model="expressionObj.TestConnectionDestID"     ng-options="testExp.TestConnectionID as testExp.TestConnctionName for testCon in testConnectionsDefined"></select>
                         </td>
 
                     </tr>
@@ -114,7 +74,7 @@
 
             </div>
 
-        </div>
+        
 
     </form>
 
