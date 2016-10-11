@@ -47,6 +47,7 @@
   <ItemGroup>
     <Compile Include="ITestScriptService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ScriptGenerator\Scriptor.cs" />
     <Compile Include="TestScriptService.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -89,6 +89,7 @@ namespace TestFrameWorkScriptGenerationService
 
         }
 
+
         [DataMember]
         public string TestScriptFileExtension
         {
@@ -146,6 +147,14 @@ namespace TestFrameWorkScriptGenerationService
 
         }
 
+
+        [DataMember]
+        public string TestScriptFileName
+        {
+            get;
+            set;
+
+        }
 
 
 

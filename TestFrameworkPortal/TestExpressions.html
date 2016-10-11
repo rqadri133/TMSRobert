@@ -1,6 +1,6 @@
 ﻿<!---Infosys innovation Team-->
 <div ng-controller="TestExpressionController as testEctrl" class="row">
-    <form id="frmTestExpression" ng-model="expressionObj" ng-submit="addTestExpression(expressionObj)">
+    <form id="frmTestExpression" ng-model="expressionObj">
         
             <div ng-show="showExpressionForm" class="widget widget-content">
                 <table class="table">
@@ -14,29 +14,39 @@
                             <select ng-model="expressionObj.TestConnectionDestID"     ng-options="testExp.TestConnectionID as testExp.TestConnctionName for testCon in testConnectionsDefined"></select>
                         </td>
 
+                        <typeScript>
+
+                            $scope.testConnectionsDefined = null;
+                            $scope.testTableSources = null;
+                            $scope.testColumnsSources = null;
+                            $scope.testOperands = null;
+                            $scope.testColumnsTarget = null;
+                            $scope.testExpressionMessage = null;
+                            $scope.showSuccessCon = false;
+                            $scope.showFailedCon = false;
+
+
+
+
+                        </typeScript>
+                  
                     </tr>
                     <tr>
                         <td class="col col-md-offset-1">
                             <b>Select Source Table</b> <br />
-                            <select ng-model="expressionObj.TestTableID" ng-options="testExp.TestTableID as testExp.TestTableName for testExp in testTableSource"></select>
+                            <select ng-model="expressionObj.TestTableID" ng-options="testExp.TestTableID as testExp.TestTableName for testExp in testTableSources"></select>
                         </td>
+
                         <td class="col col-md-offset-1">
                             <b>Select Target Table</b> <br />
                             <select ng-model="expressionObj.TestTableTargetID" ng-options="testExp.TestTableID as testExp.TestTableName for testExp in testTableSources"></select>
                         </td>
-                        <td class="col col-md-offset-1">
-                            <!---This Code is defined on the basis of Comparison between 2 positive test code , negative test code or assertion 
-                                the service will do what ever defined here as 
-                                -->
-                            <b>Comparison Expression Code  </b> <br />
-                            <select ng-model="expressionObj.TestCodeRuleID" ng-options="testExp.TestCodeID as testExp.TestCodeName for testExp in testCodes"></select>
-                      </td>
-
+                     
                     </tr>
                     <tr>
                         <td class="col col-md-offset-1">
                             <b>Select Test Column Source</b> <br />
-                             <select ng-model="expressionObj.SourceColumnID" ng-options="exprCol.TestColumnID as exprCol.TestColumnName for  in testColumnsSource"></select>
+                             <select ng-model="expressionObj.SourceColumnID" ng-options="exprCol.TestColumnID as exprCol.TestColumnName for  in testColumnsSources"></select>
                         </td>
                         <td class="col col-md-offset-1">
                             <!---just simple operations equal to AND OR  complex symbol when ever this defined go check the sqlquery or oracle query -->

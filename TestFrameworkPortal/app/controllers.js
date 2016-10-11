@@ -262,7 +262,9 @@ app.controller('TestExpressionController', function ($scope, $http, $rootScope, 
         TestConnectionSourceID : ""
     };
    
-
+    var token = {
+        TokenID : $rootScope.UserID
+    }
 
     var testConnections = TestFramworkService.loadAllConnections(token);
 
