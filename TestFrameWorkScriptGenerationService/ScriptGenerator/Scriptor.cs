@@ -77,27 +77,31 @@ namespace TestFrameWorkScriptGenerationService.ScriptGenerator
 
         private  string TranslateTokens(CodeLine lineObj)
         {
+            string _translatedCode = String.Empty;
 
            switch(lineObj.CodeExtensionType)
            {
-
                 case "java":
                     break;
 
                 case "jar":
                     break;
 
-                case "cs": 78343
+                case "cs": 
                     break;
                 case "vb":
+                    break;
 
                     // Client side only code generation script no commpilation 
-                case "js":     
-                                    
+                case "js":
 
+                    break;
 
 
             }
+
+            return _translatedCode;
+
 
 
 
