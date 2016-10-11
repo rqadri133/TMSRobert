@@ -73,6 +73,87 @@ namespace TestFrameWorkScriptGenerationService.ScriptGenerator
             return sourceFile;
         }
 
+        #region "Translate Code Lines"
+
+        private  string TranslateTokens(CodeLine lineObj)
+        {
+
+           switch(lineObj.CodeExtensionType)
+           {
+
+                case "java":
+                    break;
+
+                case "jar":
+                    break;
+
+                case "cs": 78343
+                    break;
+                case "vb":
+
+                    // Client side only code generation script no commpilation 
+                case "js":     
+                                    
+
+
+
+            }
+
+
+
+
+
+        }
+
+
+
+        #endregion 
+
+
+
+
+
+        public static string CodeLineManager<T>(TestScript instructionSet, CodeCompileUnit compileunit)
+        {
+            // Generate the code with the C# code provider.
+            CSharpCodeProvider provider = new CSharpCodeProvider();
+
+            // Build the output file name.
+            string sourceFile;
+            sourceFile = instructionSet.TestScriptFileName + "." + instructionSet.TestScriptFileExtension;
+
+            // Create a TextWriter to a StreamWriter to the output file.
+            using (StreamWriter sw = new StreamWriter(sourceFile, false))
+            {
+
+                foreach(CodeLine codel in instructionSet.CodeLines)
+                {
+
+                                   
+                       // TranslateTokens
+
+
+                }
+
+
+                // Start Wriring indenting code here
+                IndentedTextWriter tw = new IndentedTextWriter(sw, "    ");
+
+                // Generate source code using the code provider.
+                provider.GenerateCodeFromCompileUnit(compileunit, tw,
+                    new CodeGeneratorOptions());
+
+                // Close the output file.
+                tw.Close();
+            }
+
+            return sourceFile;
+        }
+
+
+
+
+
 
     }
 }

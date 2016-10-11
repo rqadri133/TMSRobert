@@ -75,6 +75,67 @@ namespace TestFrameWorkScriptGenerationService
 
     }
 
+    public class  CodeLine
+    {
+        public int LinIndex
+        {
+            get;
+            set;
+
+        }
+
+        public string CodeExtensionType
+        {
+            get;
+            set;
+
+        }
+
+        public string LineContent
+        {
+            get;
+            set;
+
+        }
+
+
+        public bool LineParsed
+        {
+            get;
+            set;
+
+        }
+
+        public string TranslateCodeExpressionToCSharpLine
+        {
+            get;
+            set;
+
+        }
+
+
+        public string TranslateCodeExpressionToJavaLine
+        {
+            get;
+            set;
+
+        }
+
+
+
+
+        public string TranslateCodeExpressionToVB
+        {
+            get;
+            set;
+
+        }
+
+
+    }
+
+
+
     // Use a data contract as illustrated in the sample below to add composite types to service operations.
     // You can add XSD files into the project. After building the project, you can directly use the data types defined there, with the namespace "TestFrameWorkScriptGenerationService.ContractType".
     [DataContract]
@@ -150,6 +211,16 @@ namespace TestFrameWorkScriptGenerationService
 
         [DataMember]
         public string TestScriptFileName
+        {
+            get;
+            set;
+
+        }
+
+
+        [DataMember]
+
+        public List<CodeLine> CodeLines
         {
             get;
             set;
