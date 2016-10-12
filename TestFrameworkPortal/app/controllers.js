@@ -246,21 +246,29 @@ app.controller('TestConnectionController', function ($scope, $http, $rootScope, 
 app.controller('TestExpressionController', function ($scope, $http, $rootScope, TestFramworkService) {
     /* test the screen only */
 
-    $scope.testExpressionMessage = "";
-
-    $scope.showSuccessCon = true;
-
+    $scope.testConnectionsDefined = null;
+    $scope.testTableSources = null;
+    $scope.testColumnsSources = null;
+    $scope.testOperands = null;
+    $scope.testColumnsTarget = null;
+    $scope.testExpressionMessage = null;
+    $scope.showSuccessCon = false;
     $scope.showFailedCon = false;
-
     $scope.expressionObj = {
+        TestConnectionID: "",
+        TestConnectionDestID: "",
         TestTableID: "",
-        TestTableTargetID:  "",
-        TestCodeRuleID: "",
-        SourceColumnID : "" ,
-        OperandIDApplied : "",
+        TestTableTargetID: "",
+        SourceColumnID: "",
+        OperandIDApplied: "",
         TargetColumnID: "",
-        TestConnectionSourceID : ""
-    };
+
+
+
+
+    }
+
+
    
     var token = {
         TokenID : $rootScope.UserID
@@ -278,51 +286,9 @@ app.controller('TestExpressionController', function ($scope, $http, $rootScope, 
 
     // here i don't need case info 
 
-        var token  = 
-        {
-            TokenID :  $rootScope.UserID
-         };
+      
 
 
-
-
-        $scope.loadAssociatedTables = function (testConnectionID) {
-
-
-
-
-        };
-
-
-
-
-    $scope.addTestExpression = function (testConnectionObj) {
-
-        /* test the screen only */
-        testConnectionObj.CreatedBy = $rootScope.UserID;
-        var testconinformation = TestFramworkService.saveTestConnectionInfo(testConnectionObj);
-        testcaseinformation.then(function (d) {
-
-            $rootScope.parentObj.beforeLogin = false;
-            $scope.testCaseCreationMessage = "Successfully Created Test Case , The Next Step to assign expression or multiple expressions to Test Case with a order sequence"
-            $rootScope.parentObj.afterLogin = true;
-
-            $scope.testConnectionMessage = "Successfully Created Test Connection , The Next Step to assign this connection to the Test expression ";
-
-            $scope.showSuccessCon = true;
-            $scope.showFailedCon = false;
-
-
-        }, function (error) {
-
-            $rootScope.testConnectionMessage = "Failed to create test connection";
-            $rootScope.showSuccessCon = false;
-            $rootScope.showFailedCon = true;
-
-
-            console.log('Oops! Something went wrong while saving the data.')
-        });
-    };
 
 
 
