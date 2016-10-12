@@ -17,8 +17,6 @@ namespace TestFrameWorkScriptGenerationService.BusinessRule
             {
                 case "QueryRule":
                     ruleCheck = new QueryExpressionsDBRule();
-              
-
                    break;
                 case "FileRule":
                     ruleCheck = new CompareFilesOnlyBusiness();
