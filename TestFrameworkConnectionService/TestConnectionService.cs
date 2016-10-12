@@ -16,6 +16,16 @@ namespace TestFrameworkConnectionService
     public class TestConnectionService : ITestConnectionService
     {
         // The Assembliess will be loaded to prvide the connections for any particular ConnectionType
+
+        public TestDataModel ConnectReturnAllTables(string connectionStr, string ConType)
+        {
+            /* Implemnenation Required */
+
+            return new TestDataModel();
+
+        }
+
+
         public List<Assembly> LoadAllAssembliesForTheConnections<T>(List<T> node)
         {
             List<Assembly> allAssemblies = null;

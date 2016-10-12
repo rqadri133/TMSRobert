@@ -14,38 +14,7 @@ namespace TestFrameWorkScriptGenerationService.ScriptGenerator
     {
 
         // Generated with the first set of instruction sets and then further more instruction sets keep it generic
-        public static string GenerateCSharpCode<T>(List<T> instructionSet ,CodeCompileUnit compileunit)
-        {
-            // Generate the code with the C# code provider.
-             CSharpCodeProvider provider = new CSharpCodeProvider();
-
-            // Build the output file name.
-            string sourceFile;
-            if (provider.FileExtension[0] == '.')
-            {
-                sourceFile = "HelloWorld" + provider.FileExtension;
-            }
-            else
-            {
-                sourceFile = "HelloWorld." + provider.FileExtension;
-            }
-
-            // Create a TextWriter to a StreamWriter to the output file.
-            using (StreamWriter sw = new StreamWriter(sourceFile, false))
-            {
-                IndentedTextWriter tw = new IndentedTextWriter(sw, "    ");
-
-                // Generate source code using the code provider.
-                provider.GenerateCodeFromCompileUnit(compileunit, tw,
-                    new CodeGeneratorOptions());
-
-                // Close the output file.
-                tw.Close();
-            }
-
-            return sourceFile;
-        }
-
+        
         public static string GenerateCSharpCode<T>(TestScript instructionSet, CodeCompileUnit compileunit)
         {
             // Generate the code with the C# code provider.
@@ -60,10 +29,15 @@ namespace TestFrameWorkScriptGenerationService.ScriptGenerator
             {
 
                 // Start Wriring indenting code here
-                IndentedTextWriter tw = new IndentedTextWriter(sw, "    ");
 
-                // Generate source code using the code provider.
-                provider.GenerateCodeFromCompileUnit(compileunit, tw,
+
+                IndentedTextWriter tw = null;
+
+                foreach (CodeLine lineofcode in instructionSet.CodeLines)
+
+                    // Generate source code using the code provider.
+                    tw = new IndentedTextWriter(sw, lineofcode.LineContent);
+                    provider.GenerateCodeFromCompileUnit(compileunit, tw,
                     new CodeGeneratorOptions());
 
                 // Close the output file.
@@ -73,7 +47,7 @@ namespace TestFrameWorkScriptGenerationService.ScriptGenerator
             return sourceFile;
         }
 
-        #region "Translate Code Lines"
+        #region "Translate Code Lines if required"
 
         private  string TranslateTokens(CodeLine lineObj)
         {
@@ -127,30 +101,7 @@ namespace TestFrameWorkScriptGenerationService.ScriptGenerator
             sourceFile = instructionSet.TestScriptFileName + "." + instructionSet.TestScriptFileExtension;
 
             // Create a TextWriter to a StreamWriter to the output file.
-            using (StreamWriter sw = new StreamWriter(sourceFile, false))
-            {
-
-                foreach(CodeLine codel in instructionSet.CodeLines)
-                {
-
-                                   
-                       // TranslateTokens
-
-
-                }
-
-
-                // Start Wriring indenting code here
-                IndentedTextWriter tw = new IndentedTextWriter(sw, "    ");
-
-                // Generate source code using the code provider.
-                provider.GenerateCodeFromCompileUnit(compileunit, tw,
-                    new CodeGeneratorOptions());
-
-                // Close the output file.
-                tw.Close();
-            }
-
+            
             return sourceFile;
         }
 
