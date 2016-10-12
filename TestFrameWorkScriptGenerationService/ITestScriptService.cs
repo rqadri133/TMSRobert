@@ -154,6 +154,25 @@ namespace TestFrameWorkScriptGenerationService
 
         }
 
+        // test only for define points  and generate test script this property is just a prototype for a while
+
+        [DataMember]
+        public List<TestFrameWorkScriptGenerationService.BusinessRule.BusinessTestPoint> BusinessTestPoints
+        {
+            get;
+            set;
+
+        }
+
+        // so the parent script is a meta data script itself
+        [DataMember]
+        public List<TestScript> GeneratedScriptsFromMasterScript
+        {
+            get;
+            set;
+
+        }
+
 
         [DataMember]
         public string RuleType

@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BusinessRule\BusinessRuleGenerator.cs" />
+    <Compile Include="BusinessRule\BusinessTestPoint.cs" />
     <Compile Include="BusinessRule\IBusinessRule.cs" />
     <Compile Include="ITestScriptService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
