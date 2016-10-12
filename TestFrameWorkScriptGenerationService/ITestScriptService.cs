@@ -156,6 +156,14 @@ namespace TestFrameWorkScriptGenerationService
 
 
         [DataMember]
+        public string RuleType
+        {
+            get;
+            set;
+        }
+
+
+        [DataMember]
         public string TestScriptFileExtension
         {
             get;
@@ -180,6 +188,30 @@ namespace TestFrameWorkScriptGenerationService
 
         }
 
+
+        [DataMember]
+        public string SourceFilePathToCompare
+        {
+            get;
+            set;
+
+
+        }
+
+        [DataMember]
+        public string DestinationFilePathToCompare
+        {
+            get;
+            set;
+
+        }
+
+
+        public List<string> FileRuleCheckFilterExpressions
+        {
+            get;
+            set;
+        }
 
 
 
@@ -267,7 +299,7 @@ namespace TestFrameWorkScriptGenerationService
         }
 
         [DataMember]
-        public  bool ExpressionPassedSyntaxRule
+        public bool ExpressionPassedSyntaxRule
         {
 
             get;
@@ -391,7 +423,7 @@ namespace TestFrameWorkScriptGenerationService
         }
 
 
-        public string  GeneratedExpressionByService 
+        public string GeneratedExpressionByService
         {
             get;
             set;
@@ -408,6 +440,21 @@ namespace TestFrameWorkScriptGenerationService
 
         // A URL TO CHECK VALUE TO 
         public string ExpressionServiceURLTARGET_NONSQL
+        {
+            get;
+            set;
+
+        }
+
+
+        public bool IsPassed
+        {
+            get;
+            set;
+
+        }
+
+        public string Results
         {
             get;
             set;
