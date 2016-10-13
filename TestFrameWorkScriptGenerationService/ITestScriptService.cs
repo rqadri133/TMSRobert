@@ -154,6 +154,21 @@ namespace TestFrameWorkScriptGenerationService
 
         }
 
+        // Any Script identified generated in C# target is .NET (Just for Now)
+        // Any Script identified genertaed in JAva target is JRE 
+
+        [DataMember]
+        public TestFrameWorkScriptGenerationService.BusinessRule.TestConfigurationSettings  TestAndRunOnThisEnvironment
+        {
+
+            get;
+            set;
+
+
+        }
+
+
+
         // test only for define points  and generate test script this property is just a prototype for a while
 
         [DataMember]
