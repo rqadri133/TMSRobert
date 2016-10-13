@@ -19,6 +19,7 @@ namespace TestFrameWorkScriptGenerationService.BusinessRule
         public List<TestScript> GenerateCodeForThisRule(TestScript script)
         {
             // only generated codee for File Comparisons 
+           
             //continue tonight all night  real fuc begin    
             // use Assertions 
             return new List<TestScript>();
