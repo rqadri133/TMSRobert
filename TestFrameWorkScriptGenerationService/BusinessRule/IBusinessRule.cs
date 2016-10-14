@@ -53,6 +53,8 @@ namespace TestFrameWorkScriptGenerationService.BusinessRule
         // suppose there are 100 expression this will create 100 test scripts on server 
         public List<TestScript> GenerateCodeForThisRule(TestScript script)
         {
+
+            // execute query and store to DT then passs to the Test Script to compare an assertion model
             // Generate code to compare query model and specic columns defined under expression for each column create a test script
             return new List<TestScript>();
 
