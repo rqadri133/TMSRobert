@@ -7,11 +7,11 @@
                     <tr>
                         <td class="col col-md-offset-1">
                             <b>Select Connection Source</b> <br />
-                            <select ng-model="expressionObj.TestConnectionID" ng-options="testExp.TestConnectionID as testExp.TestConnctionName for testCon in testConnectionsDefined"></select>
+                            <select ng-model="expressionObj.TestConnectionID" ng-options="testExp.TestConnectionID as testExp.TestConnctionName for testCon in testConnectionsAll"></select>
                         </td>
                         <td class="col col-md-offset-1">
                             <b>Target Connection </b> <br />
-                            <select ng-model="expressionObj.TestConnectionDestID"     ng-options="testExp.TestConnectionID as testExp.TestConnctionName for testCon in testConnectionsDefined"></select>
+                            <select ng-model="expressionObj.TestConnectionDestID"     ng-options="testExp.TestConnectionID as testExp.TestConnctionName for testCon in testConnectionsAll"></select>
                         </td>
 
                       
@@ -46,7 +46,7 @@
                     </tr>
                     <tr>
                             <td>
-                                <textarea class="text text-left" id="txtArae" ng-model="expressionObj.Expression"/>
+                                <textarea maxlength="2000" class="text text-left" id="txtQuery" ng-model="expressionObj.Expression"/>
                             </td>
 
                     </tr>

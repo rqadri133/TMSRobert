@@ -34,10 +34,32 @@ app.controller('LoginController', function ($scope, $http, $rootScope, TestFramw
        
         userinformation.then(function (d) {
 
+             if ($rootScope.UserID != "") {
+
+               var testConnections = TestFramworkService.loadAllConnections(token);
+
+               testConnections.then(function (d) {
+                    $rooScope.testConnectionsDefined = d.data;
+                      $scope.expressionObj.TestConnectionSourceID = d.data[0].TestConnectionID;
+
+                }, function (error) {
+                    console.log('Oops! Something went wrong while saving the data.');
+                });
+
+
+            }
+
+
+
+
+
+
             $rootScope.parentObj.beforeLogin = false;
             $rootScope.parentObj.afterLogin = true;
             $rootScope.users = d.data.AllUsers;
             $rootScope.UserID = d.data.UserID;
+
+
 
 
 
@@ -268,21 +290,30 @@ app.controller('TestExpressionController', function ($scope, $http, $rootScope, 
 
     }
 
+    $scope.showExpressionForm
+
 
    
     var token = {
-        TokenID : $rootScope.UserID
+        AuthenticationToken: $rootScope.UserID
     }
 
-    var testConnections = TestFramworkService.loadAllConnections(token);
+    if ($rootScope.UserID !=  "")
+    {
+
+
+        var testConnections = TestFramworkService.loadAllConnections(token);
 
         testConnections.then(function (d) {
-        $scope.testConnectionsDefined = d.data;
-         $scope.expressionObj.TestConnectionSourceID = d.data[0].TestConnectionID;
+            $scope.testConnectionsDefined = d.data;
+            $scope.expressionObj.TestConnectionSourceID = d.data[0].TestConnectionID;
 
-    }, function (error) {
-        console.log('Oops! Something went wrong while saving the data.');
-    });
+        }, function (error) {
+            console.log('Oops! Something went wrong while saving the data.');
+        });
+
+
+    }
 
     // here i don't need case info 
 

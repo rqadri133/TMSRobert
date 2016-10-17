@@ -28,7 +28,7 @@ var app;
         $rootScope.testConnectionTypes = [];
 
     
-
+        $rooScope.testConnectionsAll = [];
 
         $rootScope.testConnectionObj = {
             TestConnectionTypeID: "",
