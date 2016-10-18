@@ -353,4 +353,15 @@ app.controller('TestExpressionController', function ($scope, $http, $rootScope, 
 });
 
 
+app.controller('TestScriptController', function ($scope, $http, $rootScope, TestFramworkService) {
+    /* test script  screen only */
+     // the expression will be send from this controller to Service to generate script
+
+
+
+
+
+});
+
+
 

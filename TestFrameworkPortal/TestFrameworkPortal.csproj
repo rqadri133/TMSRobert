@@ -378,7 +378,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="images\dragon-fruit-nutrition-facts.jpg" />
     <Content Include="images\dragon-fruit-nutrition-factsNN.jpg" />
-    <Content Include="RegexExpressionEditor.html" />
+    <Content Include="ScriptDesigner..html" />
     <Content Include="Scripts\ai.0.15.0-build58334.js" />
     <Content Include="Scripts\ai.0.15.0-build58334.min.js" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
