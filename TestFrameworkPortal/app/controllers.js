@@ -14,9 +14,7 @@ app.controller('TFController', function ($scope, $http, $rootScope, TestFramwork
 app.controller('LoginController', function ($scope, $http, $rootScope, TestFramworkService) {
 
     
-    var tokenObj = {
-        AuthenticationToken : $rootScope.UserID 
-    };
+    
 
 
     // its tokenization based so the service dependency injection applied
@@ -34,12 +32,20 @@ app.controller('LoginController', function ($scope, $http, $rootScope, TestFramw
        
         userinformation.then(function (d) {
 
-             if ($rootScope.UserID != "") {
+         
+            $rootScope.UserID = d.data.UserID;
+
+            if ($rootScope.UserID != "") {
+
+                var token = {
+                    AuthenticationToken: $rootScope.UserID
+                };
+
 
                var testConnections = TestFramworkService.loadAllConnections(token);
 
                testConnections.then(function (d) {
-                    $rooScope.testConnectionsDefined = d.data;
+                    $rootScope.testConnectionsAll = d.data;
                       $scope.expressionObj.TestConnectionSourceID = d.data[0].TestConnectionID;
 
                 }, function (error) {
@@ -268,6 +274,9 @@ app.controller('TestConnectionController', function ($scope, $http, $rootScope, 
 app.controller('TestExpressionController', function ($scope, $http, $rootScope, TestFramworkService) {
     /* test the screen only */
 
+    $scope.showExpressionEdits = false;
+    $scope.showColumnSelections = true;
+
     $scope.testConnectionsDefined = null;
     $scope.testTableSources = null;
     $scope.testColumnsSources = null;
@@ -284,13 +293,12 @@ app.controller('TestExpressionController', function ($scope, $http, $rootScope, 
         SourceColumnID: "",
         OperandIDApplied: "",
         TargetColumnID: "",
-
+        Expression : ""
 
 
 
     }
 
-    $scope.showExpressionForm
 
 
    
@@ -316,8 +324,25 @@ app.controller('TestExpressionController', function ($scope, $http, $rootScope, 
     }
 
     // here i don't need case info 
+    $scope.areaVal = ""
 
-      
+    $scope.backToExpressionColumnRule = function () {
+
+        $scope.showExpressionEdits = false;
+        $scope.showColumnSelections = true;
+
+
+    };
+
+    $scope.showEditor = function() 
+    {
+
+        $scope.showExpressionEdits = true;
+        $scope.showColumnSelections = false ;
+
+
+
+    };
 
 
 

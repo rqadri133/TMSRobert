@@ -2,20 +2,18 @@
 <div ng-controller="TestExpressionController as testEctrl" class="row">
     <form id="frmTestExpression" ng-model="expressionObj">
         
-            <div ng-show="showExpressionForm" class="widget widget-content">
+            <div  ng-show="showColumnSelections" class="widget widget-content">
                 <table class="table">
                     <tr>
                         <td class="col col-md-offset-1">
                             <b>Select Connection Source</b> <br />
-                            <select ng-model="expressionObj.TestConnectionID" ng-options="testExp.TestConnectionID as testExp.TestConnctionName for testCon in testConnectionsAll"></select>
+                            <select ng-model="expressionObj.TestConnectionID" ng-options="testExp.TestConnectionID as testExp.TestConnectionName for testExp in testConnectionsAll"></select>
                         </td>
                         <td class="col col-md-offset-1">
                             <b>Target Connection </b> <br />
-                            <select ng-model="expressionObj.TestConnectionDestID"     ng-options="testExp.TestConnectionID as testExp.TestConnctionName for testCon in testConnectionsAll"></select>
+                            <select ng-model="expressionObj.TestConnectionDestID"     ng-options="testExp.TestConnectionID as testExp.TestConnectionName for testExp in testConnectionsAll"></select>
                         </td>
-
-                      
-                  
+         
                     </tr>
                     <tr>
                         <td class="col col-md-offset-1">
@@ -43,44 +41,48 @@
                             <b>Select Test Column Target</b> <br />
                             <select ng-model="expressionObj.TargetColumnID" ng-options="exprCol.TestColumnID as exprCol.TestColumnName for  in testColumnsTarget"></select>
                         </td>
+                        <td class="col col-md-offset-1">
+                            <button ng-click="showEditor()" type="button" class="btn btn-green"> Open Expression Editor </button>
+                        </td>
                     </tr>
-                    <tr>
-                            <td>
-                                <textarea maxlength="2000" class="text text-left" id="txtQuery" ng-model="expressionObj.Expression"/>
-                            </td>
-
-                    </tr>
-
-
                     <tr>
                         <td class="col col-md-offset-1">
-                            <b>Reason</b> <br />
-                            <input  ng-model="reason" type="text" multiple="multiple"/> 
-                        </td>
-
-                    </tr>
-
-
-
-                    <tr>
-                        <td class="col col-md-offset-">
-                            <button id="btnCaseSaveCon" class="btn btn-primary"> Save  </button>
-                            <button id="btnCancel" class="btn btn-danger"> Cancel </button>
+                            <button  ng-click="saveExpression()" class="btn btn-primary"> Save  </button>
+                            <button  ng-click="resetExpressionParams()" id="btnExpressionCancel" class="btn btn-danger"> Cancel </button>
                         </td>
                     </tr>
-                    <tr>
-                        <td align="right" class="col col-md-offset-2">
-                            <label ng-show="showSuccessCon" id="btnSaveExpression" class="label label-success"> {{testExpressionMessage}}  </label>
-                            <label ng-show="showFailedCon" id="btnCancelExpression" class="label label-danger"> {{testExpressionMessage}}  </label>
-                        </td>
-                    </tr>
+                    
                 </table>
-
             </div>
 
+        <div ng-show="showExpressionEdits" class="col col-md-offset-0">
+            <div class="col col-md-offset-1">
+              
+           
+            </div>
+
+            <br />
+            <button ng-click="backToExpressionColumnRule()" class="btn btn-primary"> Go To Column Comparison</button> <br />
+            <br />
+            <br />
+          
+               
+             <button title="Save Expression" ng-click="saveExpressionEdit()" class="btn btn-primary">   
+               <img src="images/Save.png" />
+            </button>
+
+            <button title="DeleteAll" ng-click="clearExpressionEdit()" class="btn btn-primary">
+                <img src="images/delete.jpg" />
+            </button> 
+            <br />
+           
+            <textarea ng-model="areaVal" id="editExpressions" maxlength="2000" /> <br />
         
+        </div>
+              
+     
 
     </form>
-
+    
 
 </div>

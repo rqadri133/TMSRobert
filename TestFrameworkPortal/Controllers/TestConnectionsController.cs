@@ -40,7 +40,7 @@ namespace TestFrameworkPortal.Controllers
 
         
 
-        [Route("'testconnections/LoadAll")]
+        [Route("testconnections/LoadAll")]
         [HttpPost]
         public List<TestConnection> GetTestConnection(proxyClasses.Token token)
         {

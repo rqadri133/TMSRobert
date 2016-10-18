@@ -368,6 +368,8 @@
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\ui-bootstrap-csp.css" />
+    <Content Include="images\delete.jpg" />
+    <Content Include="images\Save.png" />
     <Content Include="login.html" />
     <Content Include="DemoRequest.html" />
     <Content Include="favicon.ico" />
@@ -376,6 +378,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="images\dragon-fruit-nutrition-facts.jpg" />
     <Content Include="images\dragon-fruit-nutrition-factsNN.jpg" />
+    <Content Include="RegexExpressionEditor.html" />
     <Content Include="Scripts\ai.0.15.0-build58334.js" />
     <Content Include="Scripts\ai.0.15.0-build58334.min.js" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -1204,6 +1207,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\opinScripEdit\internalEditor.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\sorttable.js" />

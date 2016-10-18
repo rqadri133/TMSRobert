@@ -5,7 +5,7 @@
 var app;
 (function () {
 
-    app = angular.module("TFApp", ['ng', 'ngMaterial', 'ngMessages']).run(function ($rootScope) {
+    app = angular.module("TFApp", ['ng', 'ngMaterial', 'ngMessages' ]).run(function ($rootScope) {
         $rootScope.IsLogin = false;
         $rootScope.parentObj = {};
         $rootScope.parentObj.afterLogin = false;
@@ -28,7 +28,13 @@ var app;
         $rootScope.testConnectionTypes = [];
 
     
-        $rooScope.testConnectionsAll = [];
+        $rootScope.testConnectionsAll = [];
+
+        $rootScope.testTableSources = [];
+
+        $rootScope.testColumnsSources = [];
+        $rootScope.testOperands = [];
+        
 
         $rootScope.testConnectionObj = {
             TestConnectionTypeID: "",
