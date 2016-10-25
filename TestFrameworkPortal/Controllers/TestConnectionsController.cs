@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -10,7 +10,7 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using TestFrameworkPortal;
 using TestFrameworkPortal.proxyClasses;
-
+using Security;
 
 namespace TestFrameworkPortal.Controllers
 {
@@ -45,13 +45,15 @@ namespace TestFrameworkPortal.Controllers
         public List<TestConnection> GetTestConnection(proxyClasses.Token token)
         {
             Guid _authenticationToken;
-            User selectedTokenized = null;
+        
             var _connections = new List<TestConnection>();
-
+            Token selectedTokenized = null;
             if (!String.IsNullOrEmpty(token.AuthenticationToken))
             {
-                _authenticationToken = Guid.Parse(token.AuthenticationToken);
-                selectedTokenized = db.Users.ToList().Find(p => p.UserID == _authenticationToken);
+                // look for valid token 
+                // never send IDs
+                selectedTokenized = db.Tokens.ToList().Find(p => p.TokenDesc == token.AuthenticationToken);
+
                 // User exist in session  
 
                 if (selectedTokenized != null)
