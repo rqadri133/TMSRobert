@@ -12,16 +12,11 @@ namespace TestFrameworkPortal
     using System;
     using System.Collections.Generic;
     
-    public partial class User
+    public partial class Token
     {
-        public System.Guid UserID { get; set; }
-        public string LoginName { get; set; }
-        public string PasswordHash { get; set; }
-        public string EmailAddress { get; set; }
-        public string PhoneNumber { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string CompanyName { get; set; }
-        public string CompanyWebSite { get; set; }
+        public System.Guid TokenID { get; set; }
+        public string TokenDesc { get; set; }
+        public System.DateTime CreatedDate { get; set; }
+        public System.Guid CreatedBy { get; set; }
     }
 }

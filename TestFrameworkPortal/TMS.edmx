@@ -4,7 +4,23 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="TMSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="TMSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'TestCaseManagementSystem.dbo.ErrorLogger' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ErrorLogger">
+          <Key>
+            <PropertyRef Name="ErrorLogID" />
+            <PropertyRef Name="ErrorDescName" />
+            <PropertyRef Name="TransactionType" />
+            <PropertyRef Name="CreatedDate" />
+            <PropertyRef Name="CreatedBy" />
+          </Key>
+          <Property Name="ErrorLogID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ErrorDescName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="TransactionType" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
         <EntityType Name="RegressFileTests">
           <Key>
             <PropertyRef Name="RegressFileTestID" />
@@ -274,6 +290,20 @@ warning 6002: The table/view 'TestCaseManagementSystem.dbo.TestConnectionType' d
           <Property Name="CreatedDate" Type="datetime" Nullable="false" />
           <Property Name="CreatedBy" Type="uniqueidentifier" Nullable="false" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'TestCaseManagementSystem.dbo.Token' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Token">
+          <Key>
+            <PropertyRef Name="TokenID" />
+            <PropertyRef Name="TokenDesc" />
+            <PropertyRef Name="CreatedDate" />
+            <PropertyRef Name="CreatedBy" />
+          </Key>
+          <Property Name="TokenID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="TokenDesc" Type="nvarchar" MaxLength="4000" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
         <EntityType Name="Users">
           <Key>
             <PropertyRef Name="UserID" />
@@ -288,6 +318,13 @@ warning 6002: The table/view 'TestCaseManagementSystem.dbo.TestConnectionType' d
           <Property Name="CompanyName" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="CompanyWebSite" Type="nvarchar" MaxLength="100" Nullable="false" />
         </EntityType>
+        <Function Name="LoadAllColumns" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="SchemaName" Type="nvarchar" Mode="In" />
+          <Parameter Name="TableName" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="LoadAllTables" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="SchemaName" Type="nvarchar" Mode="In" />
+        </Function>
         <EntityContainer Name="TMSModelStoreContainer">
           <EntitySet Name="RegressFileTests" EntityType="Self.RegressFileTests" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TargetFramework" EntityType="Self.TargetFramework" Schema="dbo" store:Type="Tables" />
@@ -311,6 +348,15 @@ warning 6002: The table/view 'TestCaseManagementSystem.dbo.TestConnectionType' d
           <EntitySet Name="TestTargetFrameworkVersion" EntityType="Self.TestTargetFrameworkVersion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TestTypes" EntityType="Self.TestTypes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ErrorLogger" EntityType="Self.ErrorLogger" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ErrorLogger].[ErrorLogID] AS [ErrorLogID], 
+    [ErrorLogger].[ErrorDescName] AS [ErrorDescName], 
+    [ErrorLogger].[TransactionType] AS [TransactionType], 
+    [ErrorLogger].[CreatedDate] AS [CreatedDate], 
+    [ErrorLogger].[CreatedBy] AS [CreatedBy]
+    FROM [dbo].[ErrorLogger] AS [ErrorLogger]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="TestAssembly" EntityType="Self.TestAssembly" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [TestAssembly].[TestAssemblyID] AS [TestAssemblyID], 
@@ -341,8 +387,17 @@ warning 6002: The table/view 'TestCaseManagementSystem.dbo.TestConnectionType' d
     [TestConnectionType].[CreatedBy] AS [CreatedBy]
     FROM [dbo].[TestConnectionType] AS [TestConnectionType]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="Token" EntityType="Self.Token" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Token].[TokenID] AS [TokenID], 
+    [Token].[TokenDesc] AS [TokenDesc], 
+    [Token].[CreatedDate] AS [CreatedDate], 
+    [Token].[CreatedBy] AS [CreatedBy]
+    FROM [dbo].[Token] AS [Token]</DefiningQuery>
+          </EntitySet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="TMSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -356,13 +411,12 @@ warning 6002: The table/view 'TestCaseManagementSystem.dbo.TestConnectionType' d
           <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="CreatedBy" Type="Guid" Nullable="false" />
         </EntityType>
-        <EntityType Name="TestCase">
+        <EntityType Name="TargetFramework">
           <Key>
-            <PropertyRef Name="TestCaseID" />
+            <PropertyRef Name="TargetFrameworkID" />
           </Key>
-          <Property Name="TestCaseID" Type="Guid" Nullable="false" />
-          <Property Name="TestCaseDescName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="TestTypeID" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="TargetFrameworkID" Type="Guid" Nullable="false" />
+          <Property Name="TargetFrameWorkName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="CreatedBy" Type="Guid" Nullable="false" />
         </EntityType>
@@ -374,6 +428,27 @@ warning 6002: The table/view 'TestCaseManagementSystem.dbo.TestConnectionType' d
           <Property Name="TestCaseID" Type="Guid" Nullable="false" />
           <Property Name="TestNodeProfileFileType" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="TestNodeProfileBaseExpression" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Guid" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TestCas">
+          <Key>
+            <PropertyRef Name="TestCaseID" />
+          </Key>
+          <Property Name="TestCaseID" Type="Guid" Nullable="false" />
+          <Property Name="TestCaseDescName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TestTypeID" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Guid" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TestConnection">
+          <Key>
+            <PropertyRef Name="TestConnectionID" />
+          </Key>
+          <Property Name="TestConnectionID" Type="Guid" Nullable="false" />
+          <Property Name="TestConnectionName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TestConnectionString" Type="String" MaxLength="3000" FixedLength="false" Unicode="true" />
+          <Property Name="TestConnectionTypeID" Type="Guid" Nullable="false" />
           <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="CreatedBy" Type="Guid" Nullable="false" />
         </EntityType>
@@ -440,6 +515,16 @@ warning 6002: The table/view 'TestCaseManagementSystem.dbo.TestConnectionType' d
           <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="CreatedBy" Type="Guid" Nullable="false" />
         </EntityType>
+        <EntityType Name="TestNodeDetail">
+          <Key>
+            <PropertyRef Name="TestNodeDetailID" />
+          </Key>
+          <Property Name="TestNodeDetailID" Type="Guid" Nullable="false" />
+          <Property Name="TestNodeID" Type="Guid" Nullable="false" />
+          <Property Name="TestChildNodeID" Type="Guid" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Guid" Nullable="false" />
+        </EntityType>
         <EntityType Name="TestNode">
           <Key>
             <PropertyRef Name="TestNodeID" />
@@ -450,13 +535,13 @@ warning 6002: The table/view 'TestCaseManagementSystem.dbo.TestConnectionType' d
           <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="CreatedBy" Type="Guid" Nullable="false" />
         </EntityType>
-        <EntityType Name="TestNodeDetail">
+        <EntityType Name="TestOperand">
           <Key>
-            <PropertyRef Name="TestNodeDetailID" />
+            <PropertyRef Name="TestOperandID" />
           </Key>
-          <Property Name="TestNodeDetailID" Type="Guid" Nullable="false" />
-          <Property Name="TestNodeID" Type="Guid" Nullable="false" />
-          <Property Name="TestChildNodeID" Type="Guid" Nullable="false" />
+          <Property Name="TestOperandID" Type="Guid" Nullable="false" />
+          <Property Name="TestOperandToken" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TestOperandDEsc" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="CreatedBy" Type="Guid" Nullable="false" />
         </EntityType>
@@ -481,15 +566,6 @@ warning 6002: The table/view 'TestCaseManagementSystem.dbo.TestConnectionType' d
           <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="CreatedBy" Type="Guid" Nullable="false" />
         </EntityType>
-        <EntityType Name="TestScript">
-          <Key>
-            <PropertyRef Name="TestScriptID" />
-          </Key>
-          <Property Name="TestScriptID" Type="Guid" Nullable="false" />
-          <Property Name="TestScript1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="CreatedBy" Type="Guid" Nullable="false" />
-        </EntityType>
         <EntityType Name="TestScriptParameter">
           <Key>
             <PropertyRef Name="TestScriptParameterID" />
@@ -511,6 +587,25 @@ warning 6002: The table/view 'TestCaseManagementSystem.dbo.TestConnectionType' d
           <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="CreatedBy" Type="Guid" Nullable="false" />
         </EntityType>
+        <EntityType Name="TestScript">
+          <Key>
+            <PropertyRef Name="TestScriptID" />
+          </Key>
+          <Property Name="TestScriptID" Type="Guid" Nullable="false" />
+          <Property Name="TestScript1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Guid" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TestTargetFrameworkVersion">
+          <Key>
+            <PropertyRef Name="VersionID" />
+          </Key>
+          <Property Name="VersionID" Type="Guid" Nullable="false" />
+          <Property Name="FrameWorkVersionName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TargetFrameworkID" Type="Guid" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Guid" Nullable="false" />
+        </EntityType>
         <EntityType Name="TestType">
           <Key>
             <PropertyRef Name="TestTypeID" />
@@ -521,75 +616,31 @@ warning 6002: The table/view 'TestCaseManagementSystem.dbo.TestConnectionType' d
           <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="CreatedBy" Type="Guid" Nullable="false" />
         </EntityType>
-        <EntityContainer Name="TMS" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="RegressFileTests" EntityType="Self.RegressFileTest" />
-          <EntitySet Name="TestCases" EntityType="Self.TestCase" />
-          <EntitySet Name="TestCaseAssigneds" EntityType="Self.TestCaseAssigned" />
-          <EntitySet Name="TestCycles" EntityType="Self.TestCycle" />
-          <EntitySet Name="TestDataModelFunctions" EntityType="Self.TestDataModelFunction" />
-          <EntitySet Name="TestDataNodeAnaylysis" EntityType="Self.TestDataNodeAnaylysi" />
-          <EntitySet Name="TestDataNodeTriggeredEvents" EntityType="Self.TestDataNodeTriggeredEvent" />
-          <EntitySet Name="TestEnvironments" EntityType="Self.TestEnvironment" />
-          <EntitySet Name="TestExpressionInjections" EntityType="Self.TestExpressionInjection" />
-          <EntitySet Name="TestNodes" EntityType="Self.TestNode" />
-          <EntitySet Name="TestNodeDetails" EntityType="Self.TestNodeDetail" />
-          <EntitySet Name="TestResultTemplates" EntityType="Self.TestResultTemplate" />
-          <EntitySet Name="TestScenarios" EntityType="Self.TestScenario" />
-          <EntitySet Name="TestScripts" EntityType="Self.TestScript" />
-          <EntitySet Name="TestScriptParameters" EntityType="Self.TestScriptParameter" />
-          <EntitySet Name="TestScriptParameterTypes" EntityType="Self.TestScriptParameterType" />
-          <EntitySet Name="TestTypes" EntityType="Self.TestType" />
-          <EntitySet Name="Users" EntityType="TMSModel.User" />
-          <EntitySet Name="TestConnectionTypes" EntityType="TMSModel.TestConnectionType" />
-          <EntitySet Name="TargetFrameworks" EntityType="TMSModel.TargetFramework" />
-          <EntitySet Name="TestTargetFrameworkVersions" EntityType="TMSModel.TestTargetFrameworkVersion" />
-          <EntitySet Name="TestAssemblies" EntityType="TMSModel.TestAssembly" />
-          <EntitySet Name="TestClasses" EntityType="TMSModel.TestClass" />
-          <EntitySet Name="TestConnections" EntityType="TMSModel.TestConnection" />
-          <EntitySet Name="TestOperands" EntityType="TMSModel.TestOperand" />
-        </EntityContainer>
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="UserID" />
           </Key>
           <Property Name="UserID" Type="Guid" Nullable="false" />
-          <Property Name="LoginName" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
-          <Property Name="PasswordHash" Type="String" Nullable="false" MaxLength="2000" FixedLength="false" Unicode="true" />
-          <Property Name="EmailAddress" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="LoginName" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="EmailAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="PhoneNumber" Type="String" MaxLength="23" FixedLength="false" Unicode="true" />
-          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="LastName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="CompanyName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="CompanyWebSite" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="FirstName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CompanyName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CompanyWebSite" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
         </EntityType>
-        <EntityType Name="TestConnectionType">
+        <EntityType Name="ErrorLogger">
           <Key>
-            <PropertyRef Name="TestConnectionTypeID" />
-            <PropertyRef Name="TestConnctionTypeName" />
+            <PropertyRef Name="ErrorLogID" />
+            <PropertyRef Name="ErrorDescName" />
+            <PropertyRef Name="TransactionType" />
             <PropertyRef Name="CreatedDate" />
             <PropertyRef Name="CreatedBy" />
           </Key>
-          <Property Name="TestConnectionTypeID" Type="Guid" Nullable="false" />
-          <Property Name="TestConnctionTypeName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="CreatedBy" Type="Guid" Nullable="false" />
-        </EntityType>
-        <EntityType Name="TargetFramework">
-          <Key>
-            <PropertyRef Name="TargetFrameworkID" />
-          </Key>
-          <Property Name="TargetFrameworkID" Type="Guid" Nullable="false" />
-          <Property Name="TargetFrameWorkName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="CreatedBy" Type="Guid" Nullable="false" />
-        </EntityType>
-        <EntityType Name="TestTargetFrameworkVersion">
-          <Key>
-            <PropertyRef Name="VersionID" />
-          </Key>
-          <Property Name="VersionID" Type="Guid" Nullable="false" />
-          <Property Name="FrameWorkVersionName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="TargetFrameworkID" Type="Guid" Nullable="false" />
+          <Property Name="ErrorLogID" Type="Guid" Nullable="false" />
+          <Property Name="ErrorDescName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TransactionType" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="CreatedBy" Type="Guid" Nullable="false" />
         </EntityType>
@@ -604,9 +655,9 @@ warning 6002: The table/view 'TestCaseManagementSystem.dbo.TestConnectionType' d
             <PropertyRef Name="CreatedBy" />
           </Key>
           <Property Name="TestAssemblyID" Type="Guid" Nullable="false" />
-          <Property Name="TestAssemblyName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="TestAssemblyExtJarFileOrDll" Type="String" Nullable="false" MaxLength="17" FixedLength="false" Unicode="true" />
-          <Property Name="TestAssemblyFullName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="TestAssemblyName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TestAssemblyExtJarFileOrDll" Type="String" MaxLength="17" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TestAssemblyFullName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="AssemblyCreationDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="CreatedBy" Type="Guid" Nullable="false" />
@@ -622,329 +673,460 @@ warning 6002: The table/view 'TestCaseManagementSystem.dbo.TestConnectionType' d
             <PropertyRef Name="CreatedBy" />
           </Key>
           <Property Name="TestClassID" Type="Guid" Nullable="false" />
-          <Property Name="TestClassName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="TestClassName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="TestAssemblyID" Type="Guid" Nullable="false" />
-          <Property Name="TestClassDescription" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="TestClassDescription" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="ClassCreationDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="CreatedBy" Type="Guid" Nullable="false" />
         </EntityType>
-        <EntityType Name="TestConnection">
+        <EntityType Name="TestConnectionType">
           <Key>
-            <PropertyRef Name="TestConnectionID" />
+            <PropertyRef Name="TestConnectionTypeID" />
+            <PropertyRef Name="TestConnctionTypeName" />
+            <PropertyRef Name="CreatedDate" />
+            <PropertyRef Name="CreatedBy" />
           </Key>
-          <Property Name="TestConnectionID" Type="Guid" Nullable="false" />
-          <Property Name="TestConnectionName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="TestConnectionString" Type="String" MaxLength="3000" FixedLength="false" Unicode="true" />
           <Property Name="TestConnectionTypeID" Type="Guid" Nullable="false" />
+          <Property Name="TestConnctionTypeName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="CreatedBy" Type="Guid" Nullable="false" />
         </EntityType>
-        <EntityType Name="TestOperand">
+        <EntityType Name="Token">
           <Key>
-            <PropertyRef Name="TestOperandID" />
+            <PropertyRef Name="TokenID" />
+            <PropertyRef Name="TokenDesc" />
+            <PropertyRef Name="CreatedDate" />
+            <PropertyRef Name="CreatedBy" />
           </Key>
-          <Property Name="TestOperandID" Type="Guid" Nullable="false" />
-          <Property Name="TestOperandToken" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
-          <Property Name="TestOperandDEsc" Type="String" Nullable="false" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="TokenID" Type="Guid" Nullable="false" />
+          <Property Name="TokenDesc" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="CreatedBy" Type="Guid" Nullable="false" />
         </EntityType>
+        <EntityContainer Name="TMS" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="RegressFileTests" EntityType="Self.RegressFileTest" />
+          <EntitySet Name="TargetFrameworks" EntityType="Self.TargetFramework" />
+          <EntitySet Name="TestCaseAssigneds" EntityType="Self.TestCaseAssigned" />
+          <EntitySet Name="TestCases" EntityType="Self.TestCas" />
+          <EntitySet Name="TestConnections" EntityType="Self.TestConnection" />
+          <EntitySet Name="TestCycles" EntityType="Self.TestCycle" />
+          <EntitySet Name="TestDataModelFunctions" EntityType="Self.TestDataModelFunction" />
+          <EntitySet Name="TestDataNodeAnaylysis" EntityType="Self.TestDataNodeAnaylysi" />
+          <EntitySet Name="TestDataNodeTriggeredEvents" EntityType="Self.TestDataNodeTriggeredEvent" />
+          <EntitySet Name="TestEnvironments" EntityType="Self.TestEnvironment" />
+          <EntitySet Name="TestExpressionInjections" EntityType="Self.TestExpressionInjection" />
+          <EntitySet Name="TestNodeDetails" EntityType="Self.TestNodeDetail" />
+          <EntitySet Name="TestNodes" EntityType="Self.TestNode" />
+          <EntitySet Name="TestOperands" EntityType="Self.TestOperand" />
+          <EntitySet Name="TestResultTemplates" EntityType="Self.TestResultTemplate" />
+          <EntitySet Name="TestScenarios" EntityType="Self.TestScenario" />
+          <EntitySet Name="TestScriptParameters" EntityType="Self.TestScriptParameter" />
+          <EntitySet Name="TestScriptParameterTypes" EntityType="Self.TestScriptParameterType" />
+          <EntitySet Name="TestScripts" EntityType="Self.TestScript" />
+          <EntitySet Name="TestTargetFrameworkVersions" EntityType="Self.TestTargetFrameworkVersion" />
+          <EntitySet Name="TestTypes" EntityType="Self.TestType" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <EntitySet Name="ErrorLoggers" EntityType="Self.ErrorLogger" />
+          <EntitySet Name="TestAssemblies" EntityType="Self.TestAssembly" />
+          <EntitySet Name="TestClasses" EntityType="Self.TestClass" />
+          <EntitySet Name="TestConnectionTypes" EntityType="Self.TestConnectionType" />
+          <EntitySet Name="Tokens" EntityType="Self.Token" />
+          <FunctionImport Name="LoadAllColumns" ReturnType="Collection(TMSModel.LoadAllColumns_Result)">
+            <Parameter Name="SchemaName" Mode="In" Type="String" />
+            <Parameter Name="TableName" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="LoadAllTables" ReturnType="Collection(TMSModel.LoadAllTables_Result)">
+            <Parameter Name="SchemaName" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="LoadAllColumns_Result">
+          <Property Type="String" Name="TABLE_CATALOG" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="TABLE_SCHEMA" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="TABLE_NAME" Nullable="false" MaxLength="128" />
+          <Property Type="String" Name="COLUMN_NAME" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="ORDINAL_POSITION" Nullable="true" />
+          <Property Type="String" Name="COLUMN_DEFAULT" Nullable="true" MaxLength="4000" />
+          <Property Type="String" Name="IS_NULLABLE" Nullable="true" MaxLength="3" />
+          <Property Type="String" Name="DATA_TYPE" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="CHARACTER_MAXIMUM_LENGTH" Nullable="true" />
+          <Property Type="Int32" Name="CHARACTER_OCTET_LENGTH" Nullable="true" />
+          <Property Type="Byte" Name="NUMERIC_PRECISION" Nullable="true" />
+          <Property Type="Int16" Name="NUMERIC_PRECISION_RADIX" Nullable="true" />
+          <Property Type="Int32" Name="NUMERIC_SCALE" Nullable="true" />
+          <Property Type="Int16" Name="DATETIME_PRECISION" Nullable="true" />
+          <Property Type="String" Name="CHARACTER_SET_CATALOG" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="CHARACTER_SET_SCHEMA" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="CHARACTER_SET_NAME" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="COLLATION_CATALOG" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="COLLATION_SCHEMA" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="COLLATION_NAME" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="DOMAIN_CATALOG" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="DOMAIN_SCHEMA" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="DOMAIN_NAME" Nullable="true" MaxLength="128" />
+        </ComplexType>
+        <ComplexType Name="LoadAllTables_Result">
+          <Property Type="String" Name="TABLE_CATALOG" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="TABLE_SCHEMA" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="TABLE_NAME" Nullable="false" MaxLength="128" />
+          <Property Type="String" Name="TABLE_TYPE" Nullable="true" MaxLength="10" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
-    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="TMSModelStoreContainer" CdmEntityContainer="TMS">
-    <EntitySetMapping Name="RegressFileTests">
-      <EntityTypeMapping TypeName="IsTypeOf(TMSModel.RegressFileTest)">
-        <MappingFragment StoreEntitySet="RegressFileTests">
-          <ScalarProperty Name="RegressFileTestID" ColumnName="RegressFileTestID" />
-          <ScalarProperty Name="RegressTestFilePathSource" ColumnName="RegressTestFilePathSource" />
-          <ScalarProperty Name="RegressTestFileDescription" ColumnName="RegressTestFileDescription" />
-          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="TestCases">
-      <EntityTypeMapping TypeName="IsTypeOf(TMSModel.TestCase)">
-        <MappingFragment StoreEntitySet="TestCases">
-          <ScalarProperty Name="TestCaseID" ColumnName="TestCaseID" />
-          <ScalarProperty Name="TestCaseDescName" ColumnName="TestCaseDescName" />
-          <ScalarProperty Name="TestTypeID" ColumnName="TestTypeID" />
-          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="TestCaseAssigneds">
-      <EntityTypeMapping TypeName="IsTypeOf(TMSModel.TestCaseAssigned)">
-        <MappingFragment StoreEntitySet="TestCaseAssigneds">
-          <ScalarProperty Name="TestCaseAssignedID" ColumnName="TestCaseAssignedID" />
-          <ScalarProperty Name="TestCaseID" ColumnName="TestCaseID" />
-          <ScalarProperty Name="TestNodeProfileFileType" ColumnName="TestNodeProfileFileType" />
-          <ScalarProperty Name="TestNodeProfileBaseExpression" ColumnName="TestNodeProfileBaseExpression" />
-          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="TestCycles">
-      <EntityTypeMapping TypeName="IsTypeOf(TMSModel.TestCycle)">
-        <MappingFragment StoreEntitySet="TestCycles">
-          <ScalarProperty Name="TestCycleID" ColumnName="TestCycleID" />
-          <ScalarProperty Name="TestCaseID" ColumnName="TestCaseID" />
-          <ScalarProperty Name="NextTestCaseID" ColumnName="NextTestCaseID" />
-          <ScalarProperty Name="CycleStoppedDateTime" ColumnName="CycleStoppedDateTime" />
-          <ScalarProperty Name="IsRunning" ColumnName="IsRunning" />
-          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="TestDataModelFunctions">
-      <EntityTypeMapping TypeName="IsTypeOf(TMSModel.TestDataModelFunction)">
-        <MappingFragment StoreEntitySet="TestDataModelFunctions">
-          <ScalarProperty Name="TestDataModelFunctionID" ColumnName="TestDataModelFunctionID" />
-          <ScalarProperty Name="TestDataModelFunctionName" ColumnName="TestDataModelFunctionName" />
-          <ScalarProperty Name="TestModelDataParameterCommaSeparated" ColumnName="TestModelDataParameterCommaSeparated" />
-          <ScalarProperty Name="LastExecuted" ColumnName="LastExecuted" />
-          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="TestDataNodeAnaylysis">
-      <EntityTypeMapping TypeName="IsTypeOf(TMSModel.TestDataNodeAnaylysi)">
-        <MappingFragment StoreEntitySet="TestDataNodeAnaylysis">
-          <ScalarProperty Name="TestDataNodeAnalysisID" ColumnName="TestDataNodeAnalysisID" />
-          <ScalarProperty Name="TestDataNodeAnalysisName" ColumnName="TestDataNodeAnalysisName" />
-          <ScalarProperty Name="TestNodeStartPointID" ColumnName="TestNodeStartPointID" />
-          <ScalarProperty Name="TestNodeEndPointID" ColumnName="TestNodeEndPointID" />
-          <ScalarProperty Name="LastExecuted" ColumnName="LastExecuted" />
-          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="TestDataNodeTriggeredEvents">
-      <EntityTypeMapping TypeName="IsTypeOf(TMSModel.TestDataNodeTriggeredEvent)">
-        <MappingFragment StoreEntitySet="TestDataNodeTriggeredEvents">
-          <ScalarProperty Name="TestDataNodeTriggeredEventID" ColumnName="TestDataNodeTriggeredEventID" />
-          <ScalarProperty Name="TestDataNodeTriggeredEventName" ColumnName="TestDataNodeTriggeredEventName" />
-          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="TestEnvironments">
-      <EntityTypeMapping TypeName="IsTypeOf(TMSModel.TestEnvironment)">
-        <MappingFragment StoreEntitySet="TestEnvironments">
-          <ScalarProperty Name="TestEnvironmentID" ColumnName="TestEnvironmentID" />
-          <ScalarProperty Name="TestEnvironmentName" ColumnName="TestEnvironmentName" />
-          <ScalarProperty Name="ServerConnectionString" ColumnName="ServerConnectionString" />
-          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="TestExpressionInjections">
-      <EntityTypeMapping TypeName="IsTypeOf(TMSModel.TestExpressionInjection)">
-        <MappingFragment StoreEntitySet="TestExpressionInjections">
-          <ScalarProperty Name="TestExpressionInjectionID" ColumnName="TestExpressionInjectionID" />
-          <ScalarProperty Name="ExpressionInjection" ColumnName="ExpressionInjection" />
-          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="TestNodes">
-      <EntityTypeMapping TypeName="IsTypeOf(TMSModel.TestNode)">
-        <MappingFragment StoreEntitySet="TestNodes">
-          <ScalarProperty Name="TestNodeID" ColumnName="TestNodeID" />
-          <ScalarProperty Name="TestNodeName" ColumnName="TestNodeName" />
-          <ScalarProperty Name="HasChildren" ColumnName="HasChildren" />
-          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="TestNodeDetails">
-      <EntityTypeMapping TypeName="IsTypeOf(TMSModel.TestNodeDetail)">
-        <MappingFragment StoreEntitySet="TestNodeDetails">
-          <ScalarProperty Name="TestNodeDetailID" ColumnName="TestNodeDetailID" />
-          <ScalarProperty Name="TestNodeID" ColumnName="TestNodeID" />
-          <ScalarProperty Name="TestChildNodeID" ColumnName="TestChildNodeID" />
-          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="TestResultTemplates">
-      <EntityTypeMapping TypeName="IsTypeOf(TMSModel.TestResultTemplate)">
-        <MappingFragment StoreEntitySet="TestResultTemplates">
-          <ScalarProperty Name="TestResultTemplateID" ColumnName="TestResultTemplateID" />
-          <ScalarProperty Name="TestResultTemmplateURL" ColumnName="TestResultTemmplateURL" />
-          <ScalarProperty Name="TestTemplateURL" ColumnName="TestTemplateURL" />
-          <ScalarProperty Name="TestTemplateType" ColumnName="TestTemplateType" />
-          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="TestScenarios">
-      <EntityTypeMapping TypeName="IsTypeOf(TMSModel.TestScenario)">
-        <MappingFragment StoreEntitySet="TestScenarios">
-          <ScalarProperty Name="TestScenarioID" ColumnName="TestScenarioID" />
-          <ScalarProperty Name="TestScenarioDesc" ColumnName="TestScenarioDesc" />
-          <ScalarProperty Name="TestScenarioExpression" ColumnName="TestScenarioExpression" />
-          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="TestScripts">
-      <EntityTypeMapping TypeName="IsTypeOf(TMSModel.TestScript)">
-        <MappingFragment StoreEntitySet="TestScripts">
-          <ScalarProperty Name="TestScriptID" ColumnName="TestScriptID" />
-          <ScalarProperty Name="TestScript1" ColumnName="TestScript1" />
-          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="TestScriptParameters">
-      <EntityTypeMapping TypeName="IsTypeOf(TMSModel.TestScriptParameter)">
-        <MappingFragment StoreEntitySet="TestScriptParameters">
-          <ScalarProperty Name="TestScriptParameterID" ColumnName="TestScriptParameterID" />
-          <ScalarProperty Name="TestScriptParamterTypeID" ColumnName="TestScriptParamterTypeID" />
-          <ScalarProperty Name="TestScriptParameterName" ColumnName="TestScriptParameterName" />
-          <ScalarProperty Name="TestScriptParameterValueReal" ColumnName="TestScriptParameterValueReal" />
-          <ScalarProperty Name="TestScriptParameterFakeValue" ColumnName="TestScriptParameterFakeValue" />
-          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="TestScriptParameterTypes">
-      <EntityTypeMapping TypeName="IsTypeOf(TMSModel.TestScriptParameterType)">
-        <MappingFragment StoreEntitySet="TestScriptParameterTypes">
-          <ScalarProperty Name="TestScriptParamterTypeID" ColumnName="TestScriptParamterTypeID" />
-          <ScalarProperty Name="TestScriptParameterTypeName" ColumnName="TestScriptParameterTypeName" />
-          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="TestTypes">
-      <EntityTypeMapping TypeName="IsTypeOf(TMSModel.TestType)">
-        <MappingFragment StoreEntitySet="TestTypes">
-          <ScalarProperty Name="TestTypeID" ColumnName="TestTypeID" />
-          <ScalarProperty Name="TestTypeName" ColumnName="TestTypeName" />
-          <ScalarProperty Name="TestTypeDecription" ColumnName="TestTypeDecription" />
-          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Users">
-      <EntityTypeMapping TypeName="IsTypeOf(TMSModel.User)">
-        <MappingFragment StoreEntitySet="Users">
-          <ScalarProperty Name="UserID" ColumnName="UserID" />
-          <ScalarProperty Name="LoginName" ColumnName="LoginName" />
-          <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
-          <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
-          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
-          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-          <ScalarProperty Name="LastName" ColumnName="LastName" />
-          <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
-          <ScalarProperty Name="CompanyWebSite" ColumnName="CompanyWebSite" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-          <EntitySetMapping Name="TestConnectionTypes">
-            <EntityTypeMapping TypeName="TMSModel.TestConnectionType">
-              <MappingFragment StoreEntitySet="TestConnectionType">
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TMSModelStoreContainer" CdmEntityContainer="TMS">
+          <EntitySetMapping Name="RegressFileTests">
+            <EntityTypeMapping TypeName="TMSModel.RegressFileTest">
+              <MappingFragment StoreEntitySet="RegressFileTests">
+                <ScalarProperty Name="RegressFileTestID" ColumnName="RegressFileTestID" />
+                <ScalarProperty Name="RegressTestFilePathSource" ColumnName="RegressTestFilePathSource" />
+                <ScalarProperty Name="RegressTestFileDescription" ColumnName="RegressTestFileDescription" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="TestConnctionTypeName" ColumnName="TestConnctionTypeName" />
-                <ScalarProperty Name="TestConnectionTypeID" ColumnName="TestConnectionTypeID" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TargetFrameworks">
             <EntityTypeMapping TypeName="TMSModel.TargetFramework">
               <MappingFragment StoreEntitySet="TargetFramework">
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="TargetFrameworkID" ColumnName="TargetFrameworkID" />
                 <ScalarProperty Name="TargetFrameWorkName" ColumnName="TargetFrameWorkName" />
-                <ScalarProperty Name="TargetFrameworkID" ColumnName="TargetFrameworkID" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="TestTargetFrameworkVersions">
-            <EntityTypeMapping TypeName="TMSModel.TestTargetFrameworkVersion">
-              <MappingFragment StoreEntitySet="TestTargetFrameworkVersion">
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <EntitySetMapping Name="TestCaseAssigneds">
+            <EntityTypeMapping TypeName="TMSModel.TestCaseAssigned">
+              <MappingFragment StoreEntitySet="TestCaseAssigneds">
+                <ScalarProperty Name="TestCaseAssignedID" ColumnName="TestCaseAssignedID" />
+                <ScalarProperty Name="TestCaseID" ColumnName="TestCaseID" />
+                <ScalarProperty Name="TestNodeProfileFileType" ColumnName="TestNodeProfileFileType" />
+                <ScalarProperty Name="TestNodeProfileBaseExpression" ColumnName="TestNodeProfileBaseExpression" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="TargetFrameworkID" ColumnName="TargetFrameworkID" />
-                <ScalarProperty Name="FrameWorkVersionName" ColumnName="FrameWorkVersionName" />
-                <ScalarProperty Name="VersionID" ColumnName="VersionID" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="TestAssemblies">
-            <EntityTypeMapping TypeName="TMSModel.TestAssembly">
-              <MappingFragment StoreEntitySet="TestAssembly">
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <EntitySetMapping Name="TestCases">
+            <EntityTypeMapping TypeName="TMSModel.TestCas">
+              <MappingFragment StoreEntitySet="TestCases">
+                <ScalarProperty Name="TestCaseID" ColumnName="TestCaseID" />
+                <ScalarProperty Name="TestCaseDescName" ColumnName="TestCaseDescName" />
+                <ScalarProperty Name="TestTypeID" ColumnName="TestTypeID" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="AssemblyCreationDate" ColumnName="AssemblyCreationDate" />
-                <ScalarProperty Name="TestAssemblyFullName" ColumnName="TestAssemblyFullName" />
-                <ScalarProperty Name="TestAssemblyExtJarFileOrDll" ColumnName="TestAssemblyExtJarFileOrDll" />
-                <ScalarProperty Name="TestAssemblyName" ColumnName="TestAssemblyName" />
-                <ScalarProperty Name="TestAssemblyID" ColumnName="TestAssemblyID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TestClasses">
-            <EntityTypeMapping TypeName="TMSModel.TestClass">
-              <MappingFragment StoreEntitySet="TestClass">
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="ClassCreationDate" ColumnName="ClassCreationDate" />
-                <ScalarProperty Name="TestClassDescription" ColumnName="TestClassDescription" />
-                <ScalarProperty Name="TestAssemblyID" ColumnName="TestAssemblyID" />
-                <ScalarProperty Name="TestClassName" ColumnName="TestClassName" />
-                <ScalarProperty Name="TestClassID" ColumnName="TestClassID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TestConnections">
             <EntityTypeMapping TypeName="TMSModel.TestConnection">
               <MappingFragment StoreEntitySet="TestConnection">
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="TestConnectionTypeID" ColumnName="TestConnectionTypeID" />
-                <ScalarProperty Name="TestConnectionString" ColumnName="TestConnectionString" />
-                <ScalarProperty Name="TestConnectionName" ColumnName="TestConnectionName" />
                 <ScalarProperty Name="TestConnectionID" ColumnName="TestConnectionID" />
+                <ScalarProperty Name="TestConnectionName" ColumnName="TestConnectionName" />
+                <ScalarProperty Name="TestConnectionString" ColumnName="TestConnectionString" />
+                <ScalarProperty Name="TestConnectionTypeID" ColumnName="TestConnectionTypeID" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TestCycles">
+            <EntityTypeMapping TypeName="TMSModel.TestCycle">
+              <MappingFragment StoreEntitySet="TestCycles">
+                <ScalarProperty Name="TestCycleID" ColumnName="TestCycleID" />
+                <ScalarProperty Name="TestCaseID" ColumnName="TestCaseID" />
+                <ScalarProperty Name="NextTestCaseID" ColumnName="NextTestCaseID" />
+                <ScalarProperty Name="CycleStoppedDateTime" ColumnName="CycleStoppedDateTime" />
+                <ScalarProperty Name="IsRunning" ColumnName="IsRunning" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TestDataModelFunctions">
+            <EntityTypeMapping TypeName="TMSModel.TestDataModelFunction">
+              <MappingFragment StoreEntitySet="TestDataModelFunctions">
+                <ScalarProperty Name="TestDataModelFunctionID" ColumnName="TestDataModelFunctionID" />
+                <ScalarProperty Name="TestDataModelFunctionName" ColumnName="TestDataModelFunctionName" />
+                <ScalarProperty Name="TestModelDataParameterCommaSeparated" ColumnName="TestModelDataParameterCommaSeparated" />
+                <ScalarProperty Name="LastExecuted" ColumnName="LastExecuted" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TestDataNodeAnaylysis">
+            <EntityTypeMapping TypeName="TMSModel.TestDataNodeAnaylysi">
+              <MappingFragment StoreEntitySet="TestDataNodeAnaylysis">
+                <ScalarProperty Name="TestDataNodeAnalysisID" ColumnName="TestDataNodeAnalysisID" />
+                <ScalarProperty Name="TestDataNodeAnalysisName" ColumnName="TestDataNodeAnalysisName" />
+                <ScalarProperty Name="TestNodeStartPointID" ColumnName="TestNodeStartPointID" />
+                <ScalarProperty Name="TestNodeEndPointID" ColumnName="TestNodeEndPointID" />
+                <ScalarProperty Name="LastExecuted" ColumnName="LastExecuted" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TestDataNodeTriggeredEvents">
+            <EntityTypeMapping TypeName="TMSModel.TestDataNodeTriggeredEvent">
+              <MappingFragment StoreEntitySet="TestDataNodeTriggeredEvents">
+                <ScalarProperty Name="TestDataNodeTriggeredEventID" ColumnName="TestDataNodeTriggeredEventID" />
+                <ScalarProperty Name="TestDataNodeTriggeredEventName" ColumnName="TestDataNodeTriggeredEventName" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TestEnvironments">
+            <EntityTypeMapping TypeName="TMSModel.TestEnvironment">
+              <MappingFragment StoreEntitySet="TestEnvironments">
+                <ScalarProperty Name="TestEnvironmentID" ColumnName="TestEnvironmentID" />
+                <ScalarProperty Name="TestEnvironmentName" ColumnName="TestEnvironmentName" />
+                <ScalarProperty Name="ServerConnectionString" ColumnName="ServerConnectionString" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TestExpressionInjections">
+            <EntityTypeMapping TypeName="TMSModel.TestExpressionInjection">
+              <MappingFragment StoreEntitySet="TestExpressionInjections">
+                <ScalarProperty Name="TestExpressionInjectionID" ColumnName="TestExpressionInjectionID" />
+                <ScalarProperty Name="ExpressionInjection" ColumnName="ExpressionInjection" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TestNodeDetails">
+            <EntityTypeMapping TypeName="TMSModel.TestNodeDetail">
+              <MappingFragment StoreEntitySet="TestNodeDetails">
+                <ScalarProperty Name="TestNodeDetailID" ColumnName="TestNodeDetailID" />
+                <ScalarProperty Name="TestNodeID" ColumnName="TestNodeID" />
+                <ScalarProperty Name="TestChildNodeID" ColumnName="TestChildNodeID" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TestNodes">
+            <EntityTypeMapping TypeName="TMSModel.TestNode">
+              <MappingFragment StoreEntitySet="TestNodes">
+                <ScalarProperty Name="TestNodeID" ColumnName="TestNodeID" />
+                <ScalarProperty Name="TestNodeName" ColumnName="TestNodeName" />
+                <ScalarProperty Name="HasChildren" ColumnName="HasChildren" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TestOperands">
             <EntityTypeMapping TypeName="TMSModel.TestOperand">
               <MappingFragment StoreEntitySet="TestOperand">
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="TestOperandDEsc" ColumnName="TestOperandDEsc" />
-                <ScalarProperty Name="TestOperandToken" ColumnName="TestOperandToken" />
                 <ScalarProperty Name="TestOperandID" ColumnName="TestOperandID" />
+                <ScalarProperty Name="TestOperandToken" ColumnName="TestOperandToken" />
+                <ScalarProperty Name="TestOperandDEsc" ColumnName="TestOperandDEsc" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-  </EntityContainerMapping>
-</Mapping></edmx:Mappings>
+          <EntitySetMapping Name="TestResultTemplates">
+            <EntityTypeMapping TypeName="TMSModel.TestResultTemplate">
+              <MappingFragment StoreEntitySet="TestResultTemplates">
+                <ScalarProperty Name="TestResultTemplateID" ColumnName="TestResultTemplateID" />
+                <ScalarProperty Name="TestResultTemmplateURL" ColumnName="TestResultTemmplateURL" />
+                <ScalarProperty Name="TestTemplateURL" ColumnName="TestTemplateURL" />
+                <ScalarProperty Name="TestTemplateType" ColumnName="TestTemplateType" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TestScenarios">
+            <EntityTypeMapping TypeName="TMSModel.TestScenario">
+              <MappingFragment StoreEntitySet="TestScenarios">
+                <ScalarProperty Name="TestScenarioID" ColumnName="TestScenarioID" />
+                <ScalarProperty Name="TestScenarioDesc" ColumnName="TestScenarioDesc" />
+                <ScalarProperty Name="TestScenarioExpression" ColumnName="TestScenarioExpression" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TestScriptParameters">
+            <EntityTypeMapping TypeName="TMSModel.TestScriptParameter">
+              <MappingFragment StoreEntitySet="TestScriptParameters">
+                <ScalarProperty Name="TestScriptParameterID" ColumnName="TestScriptParameterID" />
+                <ScalarProperty Name="TestScriptParamterTypeID" ColumnName="TestScriptParamterTypeID" />
+                <ScalarProperty Name="TestScriptParameterName" ColumnName="TestScriptParameterName" />
+                <ScalarProperty Name="TestScriptParameterValueReal" ColumnName="TestScriptParameterValueReal" />
+                <ScalarProperty Name="TestScriptParameterFakeValue" ColumnName="TestScriptParameterFakeValue" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TestScriptParameterTypes">
+            <EntityTypeMapping TypeName="TMSModel.TestScriptParameterType">
+              <MappingFragment StoreEntitySet="TestScriptParameterTypes">
+                <ScalarProperty Name="TestScriptParamterTypeID" ColumnName="TestScriptParamterTypeID" />
+                <ScalarProperty Name="TestScriptParameterTypeName" ColumnName="TestScriptParameterTypeName" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TestScripts">
+            <EntityTypeMapping TypeName="TMSModel.TestScript">
+              <MappingFragment StoreEntitySet="TestScripts">
+                <ScalarProperty Name="TestScriptID" ColumnName="TestScriptID" />
+                <ScalarProperty Name="TestScript1" ColumnName="TestScript1" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TestTargetFrameworkVersions">
+            <EntityTypeMapping TypeName="TMSModel.TestTargetFrameworkVersion">
+              <MappingFragment StoreEntitySet="TestTargetFrameworkVersion">
+                <ScalarProperty Name="VersionID" ColumnName="VersionID" />
+                <ScalarProperty Name="FrameWorkVersionName" ColumnName="FrameWorkVersionName" />
+                <ScalarProperty Name="TargetFrameworkID" ColumnName="TargetFrameworkID" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TestTypes">
+            <EntityTypeMapping TypeName="TMSModel.TestType">
+              <MappingFragment StoreEntitySet="TestTypes">
+                <ScalarProperty Name="TestTypeID" ColumnName="TestTypeID" />
+                <ScalarProperty Name="TestTypeName" ColumnName="TestTypeName" />
+                <ScalarProperty Name="TestTypeDecription" ColumnName="TestTypeDecription" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="TMSModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="LoginName" ColumnName="LoginName" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="CompanyWebSite" ColumnName="CompanyWebSite" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ErrorLoggers">
+            <EntityTypeMapping TypeName="TMSModel.ErrorLogger">
+              <MappingFragment StoreEntitySet="ErrorLogger">
+                <ScalarProperty Name="ErrorLogID" ColumnName="ErrorLogID" />
+                <ScalarProperty Name="ErrorDescName" ColumnName="ErrorDescName" />
+                <ScalarProperty Name="TransactionType" ColumnName="TransactionType" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TestAssemblies">
+            <EntityTypeMapping TypeName="TMSModel.TestAssembly">
+              <MappingFragment StoreEntitySet="TestAssembly">
+                <ScalarProperty Name="TestAssemblyID" ColumnName="TestAssemblyID" />
+                <ScalarProperty Name="TestAssemblyName" ColumnName="TestAssemblyName" />
+                <ScalarProperty Name="TestAssemblyExtJarFileOrDll" ColumnName="TestAssemblyExtJarFileOrDll" />
+                <ScalarProperty Name="TestAssemblyFullName" ColumnName="TestAssemblyFullName" />
+                <ScalarProperty Name="AssemblyCreationDate" ColumnName="AssemblyCreationDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TestClasses">
+            <EntityTypeMapping TypeName="TMSModel.TestClass">
+              <MappingFragment StoreEntitySet="TestClass">
+                <ScalarProperty Name="TestClassID" ColumnName="TestClassID" />
+                <ScalarProperty Name="TestClassName" ColumnName="TestClassName" />
+                <ScalarProperty Name="TestAssemblyID" ColumnName="TestAssemblyID" />
+                <ScalarProperty Name="TestClassDescription" ColumnName="TestClassDescription" />
+                <ScalarProperty Name="ClassCreationDate" ColumnName="ClassCreationDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TestConnectionTypes">
+            <EntityTypeMapping TypeName="TMSModel.TestConnectionType">
+              <MappingFragment StoreEntitySet="TestConnectionType">
+                <ScalarProperty Name="TestConnectionTypeID" ColumnName="TestConnectionTypeID" />
+                <ScalarProperty Name="TestConnctionTypeName" ColumnName="TestConnctionTypeName" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tokens">
+            <EntityTypeMapping TypeName="TMSModel.Token">
+              <MappingFragment StoreEntitySet="Token">
+                <ScalarProperty Name="TokenID" ColumnName="TokenID" />
+                <ScalarProperty Name="TokenDesc" ColumnName="TokenDesc" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="LoadAllColumns" FunctionName="TMSModel.Store.LoadAllColumns">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TMSModel.LoadAllColumns_Result">
+                <ScalarProperty Name="TABLE_CATALOG" ColumnName="TABLE_CATALOG" />
+                <ScalarProperty Name="TABLE_SCHEMA" ColumnName="TABLE_SCHEMA" />
+                <ScalarProperty Name="TABLE_NAME" ColumnName="TABLE_NAME" />
+                <ScalarProperty Name="COLUMN_NAME" ColumnName="COLUMN_NAME" />
+                <ScalarProperty Name="ORDINAL_POSITION" ColumnName="ORDINAL_POSITION" />
+                <ScalarProperty Name="COLUMN_DEFAULT" ColumnName="COLUMN_DEFAULT" />
+                <ScalarProperty Name="IS_NULLABLE" ColumnName="IS_NULLABLE" />
+                <ScalarProperty Name="DATA_TYPE" ColumnName="DATA_TYPE" />
+                <ScalarProperty Name="CHARACTER_MAXIMUM_LENGTH" ColumnName="CHARACTER_MAXIMUM_LENGTH" />
+                <ScalarProperty Name="CHARACTER_OCTET_LENGTH" ColumnName="CHARACTER_OCTET_LENGTH" />
+                <ScalarProperty Name="NUMERIC_PRECISION" ColumnName="NUMERIC_PRECISION" />
+                <ScalarProperty Name="NUMERIC_PRECISION_RADIX" ColumnName="NUMERIC_PRECISION_RADIX" />
+                <ScalarProperty Name="NUMERIC_SCALE" ColumnName="NUMERIC_SCALE" />
+                <ScalarProperty Name="DATETIME_PRECISION" ColumnName="DATETIME_PRECISION" />
+                <ScalarProperty Name="CHARACTER_SET_CATALOG" ColumnName="CHARACTER_SET_CATALOG" />
+                <ScalarProperty Name="CHARACTER_SET_SCHEMA" ColumnName="CHARACTER_SET_SCHEMA" />
+                <ScalarProperty Name="CHARACTER_SET_NAME" ColumnName="CHARACTER_SET_NAME" />
+                <ScalarProperty Name="COLLATION_CATALOG" ColumnName="COLLATION_CATALOG" />
+                <ScalarProperty Name="COLLATION_SCHEMA" ColumnName="COLLATION_SCHEMA" />
+                <ScalarProperty Name="COLLATION_NAME" ColumnName="COLLATION_NAME" />
+                <ScalarProperty Name="DOMAIN_CATALOG" ColumnName="DOMAIN_CATALOG" />
+                <ScalarProperty Name="DOMAIN_SCHEMA" ColumnName="DOMAIN_SCHEMA" />
+                <ScalarProperty Name="DOMAIN_NAME" ColumnName="DOMAIN_NAME" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="LoadAllTables" FunctionName="TMSModel.Store.LoadAllTables">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TMSModel.LoadAllTables_Result">
+                <ScalarProperty Name="TABLE_CATALOG" ColumnName="TABLE_CATALOG" />
+                <ScalarProperty Name="TABLE_SCHEMA" ColumnName="TABLE_SCHEMA" />
+                <ScalarProperty Name="TABLE_NAME" ColumnName="TABLE_NAME" />
+                <ScalarProperty Name="TABLE_TYPE" ColumnName="TABLE_TYPE" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
   </edmx:Runtime>
   <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
   <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
@@ -958,7 +1140,7 @@ warning 6002: The table/view 'TestCaseManagementSystem.dbo.TestConnectionType' d
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="true" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
-        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
       </DesignerInfoPropertySet>
     </Options>
