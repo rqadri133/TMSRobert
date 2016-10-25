@@ -1,4 +1,4 @@
-﻿'use strict';
+'use strict';
 
 
 app.service("TestFramworkService", function ($http ,$rootScope)  
@@ -18,6 +18,16 @@ app.service("TestFramworkService", function ($http ,$rootScope)
 
     };
 
+
+    ths.getClientIpAddress = function () {
+        var json = 'http://ipv4.myexternalip.com/json';
+        var ipAddress = "";
+        $http.get(json).then(function (result) {
+            ipAddress= result.data.ip;
+        });
+
+        return ipAddress;
+    };
 
 
 
