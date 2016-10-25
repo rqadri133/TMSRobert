@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -25,19 +25,22 @@ namespace TestFrameworkPortal.Controllers
 
         [Route("testconnectiontype/LoadAll")]
         [HttpPost]
-        public List<TestConnectionType> GetTestConnectionTypes(Token token)
+        public List<TestConnectionType> GetTestConnectionTypes(proxyClasses.Token token)
         {
+
+            // so dont use id you are asking him to hack all by sending ids use generated Tokens
             Guid _authenticationToken ;
             User selectedTokenized = null;
             var _connectiontypes = new List<TestConnectionType>();
+            Token _toFind = null;
 
             if(!String.IsNullOrEmpty(token.AuthenticationToken))
             {
-                _authenticationToken = Guid.Parse(token.AuthenticationToken);
-                selectedTokenized = db.Users.ToList().Find(p => p.UserID == _authenticationToken);
+                _toFind =  db.Tokens.ToList().Find(p => p.TokenDesc == token.AuthenticationToken);
+                                    
                 // User exist in session  
 
-                if (selectedTokenized != null)
+                if (_toFind != null)
                 {
                     _connectiontypes = db.TestConnectionTypes.ToList<TestConnectionType>();
                 }
