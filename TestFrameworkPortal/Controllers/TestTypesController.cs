@@ -20,7 +20,40 @@ namespace TestFrameworkPortal.Controllers
         public List<TestType> GetTestTypes()
         {
             return db.TestTypes.ToList<TestType>();
+
+
         }
+
+
+        [Route("load/testtypes")]
+        [HttpPost]
+        public List<TestType> LoadTestTypes(proxyClasses.Token token)
+        {
+            Guid _authenticationToken;
+
+            var _testtypes = new List<TestType>();
+            Token selectedTokenized = null;
+            if (!String.IsNullOrEmpty(token.AuthenticationToken))
+            {
+                // look for valid token 
+                // never send IDs
+                selectedTokenized = db.Tokens.ToList().Find(p => p.TokenDesc == token.AuthenticationToken);
+
+                // User exist in session  
+
+                if (selectedTokenized != null)
+                {
+                    _testtypes = db.TestTypes.ToList<TestType>();
+                }
+
+            }
+
+            return _testtypes;
+
+        }
+
+
+
 
         // GET: api/TestTypes/5
         [ResponseType(typeof(TestType))]

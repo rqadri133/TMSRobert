@@ -88,6 +88,15 @@ app.controller('LoginController', function ($scope, $http, $rootScope, TestFramw
 
             });
 
+             var testtypes = TestFramworkService.getTestTypes(tokenObj);
+
+             testtypes.then(function (d) {
+                 $rootScope.testTypes = d.data;
+            }, function (error) {
+                 console.log('Oops! Something went wrong while saving the data.');
+
+
+             });
 
 
 

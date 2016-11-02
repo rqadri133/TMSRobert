@@ -8,9 +8,14 @@ app.service("TestFramworkService", function ($http ,$rootScope)
 
     };
 
-    this.getTestTypes = function () {
-        return $http.get("api/TestTypes")
+    this.getTestTypes = function (tokenObj) {
+        return $http(
+          {
+              method: 'post',
+              data: tokenObj,
+              url: 'load/testtypes'
 
+          });
     };
 
     this.getTestOperands = function () {
@@ -19,7 +24,7 @@ app.service("TestFramworkService", function ($http ,$rootScope)
     };
 
 
-    ths.getClientIpAddress = function () {
+    this.getClientIpAddress = function () {
         var json = 'http://ipv4.myexternalip.com/json';
         var ipAddress = "";
         $http.get(json).then(function (result) {

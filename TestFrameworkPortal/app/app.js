@@ -25,6 +25,8 @@ var app;
             
         };
 
+        $rootScope.testTypes = [];
+
         $rootScope.testConnectionTypes = [];
 
     
