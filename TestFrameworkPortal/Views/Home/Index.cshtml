@@ -14,6 +14,11 @@
                         </p>
                     </md-content>
                 </md-tab>
+                <md-tab label="Demo">
+                    <md-content class="md-padding">
+                        <ng-include src="'demorequest.html'"></ng-include>
+                    </md-content>
+                </md-tab>
                 
                 <md-tab label="Login">
                     <md-content class="md-padding">
@@ -27,11 +32,7 @@
 
         <md-content ng-show="parentObj.afterLogin">
             <md-tabs md-border-bottom="" md-dynamic-height="">
-                <md-tab label="Demo">
-                    <md-content class="md-padding">
-                        <ng-include src="'demorequest.html'"></ng-include>
-                    </md-content>
-                </md-tab>
+            
 
                 <md-tab  label="System Admin">
                     <md-content class="md-padding">

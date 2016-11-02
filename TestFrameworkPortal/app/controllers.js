@@ -9,15 +9,9 @@ app.controller('TFController', function ($scope, $http, $rootScope, TestFramwork
 
 });
 
-
-
 app.controller('LoginController', function ($scope, $http, $rootScope, TestFramworkService) {
-
-    
-    
-
-
-    // its tokenization based so the service dependency injection applied
+  
+  // its tokenization based so the service dependency injection applied
     
     $scope.login = function () {
 
@@ -26,8 +20,6 @@ app.controller('LoginController', function ($scope, $http, $rootScope, TestFramw
             UserName: $scope.txtUserID,
             Pwd: $scope.txtPwd
         };
-
-
         var userinformation = TestFramworkService.loginInfo(userInfo);
        
         userinformation.then(function (d) {
@@ -188,8 +180,6 @@ app.controller('TestCaseController', function ($scope, $http, $rootScope, TestFr
     $scope.testCycleDate = null;
     $scope.testTypesAll = [];
     
-
-    var testtypes = TestFramworkService.getTestTypes();
     
 
     $scope.testCaseinformation = {
@@ -200,13 +190,6 @@ app.controller('TestCaseController', function ($scope, $http, $rootScope, TestFr
     }
 
 
-    testtypes.then(function (d) {
-        $scope.testTypesAll = d.data;
-        $scope.testCaseinformation.TestTypeID = d.data[0].TestTypeID;
-
-    }, function (error) {
-        console.log('Oops! Something went wrong while saving the data.');
-    });
      
     $scope.addTestCase = function (testCaseInformation) {
 
